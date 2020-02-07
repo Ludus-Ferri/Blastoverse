@@ -15,6 +15,7 @@ MonoBehaviour:
   components:
   - {fileID: 661688796178516127}
   - {fileID: 6629960904951992912}
+  - {fileID: 6899952820041569725}
 --- !u!114 &661688796178516127
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -83,16 +84,16 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   threshold:
-    m_OverrideState: 0
-    m_Value: 0.9
+    m_OverrideState: 1
+    m_Value: 0.46
     min: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1.42
     min: 0
   scatter:
     m_OverrideState: 0
-    m_Value: 0.7
+    m_Value: 0.763
     min: 0
     max: 1
   clamp:
