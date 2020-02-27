@@ -6,11 +6,17 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Input Properties")]
     public float controlAreaSize;
+
     public float rotateSpeed;
     public float singleTouchAccelTime;
     public float accelFactor;
+
     public float dualTouchRotateSpeed;
     public float dualToSingleSlowdown;
+
+    public float maxDoubleTapDuration;
+    public float doubleTapVariance;
+
 
     [Header("Physics")]
     public float momentOfInertia;
@@ -19,6 +25,10 @@ public class PlayerController : MonoBehaviour
     private float rotInput;
     private float rotation;
     private float singleTouchBeginTime;
+
+    private float tapTime;
+    private float tapCount = 0;
+    private Touch lastTouch;
 
     private float oldDeltaY = 0;
     private int oldTouchCount = 0;
@@ -61,7 +71,37 @@ public class PlayerController : MonoBehaviour
 
     private void DetectGestures()
     {
+        HandleDoubleTap();
+    }
 
+    private void HandleDoubleTap()
+    {
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.position.x > GameManager.Instance.screenWidth * controlAreaSize / 2
+                && touch.position.x < GameManager.Instance.screenWidth - GameManager.Instance.screenWidth * controlAreaSize / 2
+                && touch.phase == TouchPhase.Began)
+                tapCount++;
+
+            if (tapCount == 1)
+            {
+                tapTime = Time.time + maxDoubleTapDuration;
+            }
+            else if (tapCount == 2 && Time.time < tapTime)
+            {
+                if ((lastTouch.position - touch.position).magnitude < doubleTapVariance * Screen.dpi)
+                    OnDoubleTap?.Invoke();
+
+                tapCount = 0;
+            }
+
+            if (Time.time > tapTime)
+                tapCount = 0;
+
+            lastTouch = touch;
+        }
     }
 
     private void GetInput()
@@ -146,7 +186,6 @@ public class PlayerController : MonoBehaviour
             OnEndMovement?.Invoke();
         }
 
-        Debug.Log(rotInput);
         oldTouchCount = touchCount;
     }
 

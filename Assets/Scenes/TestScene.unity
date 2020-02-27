@@ -322,12 +322,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89d6c25773942649aee3084ebd59dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlAreaSize: 0.8
+  controlAreaSize: 0.7
   rotateSpeed: 100
   singleTouchAccelTime: 4
   accelFactor: 800
   dualTouchRotateSpeed: 5000
   dualToSingleSlowdown: 10
+  maxDoubleTapDuration: 0.4
+  doubleTapVariance: 4
   momentOfInertia: 9
   rotSpeedCap: 600
 --- !u!1 &1792823198
