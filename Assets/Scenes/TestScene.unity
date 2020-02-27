@@ -162,7 +162,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279480814}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241010253}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40cb7386f7adb0b4e9ad1443fcb58994, type: 3}
   m_Name: 
@@ -322,9 +322,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89d6c25773942649aee3084ebd59dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 200
+  controlAreaSize: 0.8
+  rotateSpeed: 100
+  singleTouchAccelTime: 4
+  accelFactor: 800
   dualTouchRotateSpeed: 5000
-  inertia: 9
+  dualToSingleSlowdown: 10
+  momentOfInertia: 9
+  rotSpeedCap: 600
 --- !u!1 &1792823198
 GameObject:
   m_ObjectHideFlags: 0
