@@ -9,9 +9,16 @@ public class ScoreSystem : MonoBehaviour
 {
     public static ScoreSystem Instance;
 
-    public float score;
+    float score;
+    public int Score
+    {
+        get
+        {
+            return Mathf.RoundToInt(score);
+        }
+    }
 
-    [Header("Score Growth Propeties")]
+    [Header("Score Growth Properties")]
     public int scorePerSecond;
     public float scoreMultiplier;
 
