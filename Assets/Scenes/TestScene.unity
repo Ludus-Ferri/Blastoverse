@@ -278,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646080601}
   - component: {fileID: 646080603}
+  - component: {fileID: 646080604}
   - component: {fileID: 646080602}
   m_Layer: 5
   m_Name: Score Text
@@ -323,10 +324,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <color=#ffffff30>0</color>12345
+  m_text: <color=#FFFFFF47>0</color>12345
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25e0cc8441e445e408ea532b2817c3e4, type: 2}
-  m_sharedMaterial: {fileID: 3219170221638190254, guid: 25e0cc8441e445e408ea532b2817c3e4,
+  m_sharedMaterial: {fileID: -817367967276964125, guid: 25e0cc8441e445e408ea532b2817c3e4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -418,12 +419,20 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &646080603
 CanvasRenderer:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646080600}
   m_CullTransparentMesh: 0
+--- !u!33 &646080604
+MeshFilter:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646080600}
+  m_Mesh: {fileID: 0}
 --- !u!1 &858888395
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +619,8 @@ MonoBehaviour:
   scorePerSecond: 20
   scoreMultiplier: 1
   scoreText: {fileID: 646080602}
-  zeroColor: {r: 1, g: 1, b: 1, a: 0.18431373}
+  zeroColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0.18431373}
+  zeroPadding: 8
 --- !u!1 &1393788221
 GameObject:
   m_ObjectHideFlags: 0
