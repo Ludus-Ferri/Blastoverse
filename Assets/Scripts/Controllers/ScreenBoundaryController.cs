@@ -18,6 +18,13 @@ public class ScreenBoundaryController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log($"{collision.gameObject.name} has left the screen!");
+        if (collision.gameObject.CompareTag("Poolable"))
+        {
+#if UNITY_EDITOR
+            Debug.Log($"{collision.gameObject.name} has left the screen!");
+#endif
+            collision.gameObject.SetActive(false);
+        }
+
     }
 }

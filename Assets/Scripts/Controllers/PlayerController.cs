@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
     public float maxDoubleTapDuration;
     public float doubleTapVariance;
 
+    [Header("Shooting Properties")]
+    public ObjectPooler bulletPool;
+    public float shootingCooldown;
+    public Vector2 bulletOffset;
+
+    private float lastShootTime = 0;
+
 
     [Header("Physics")]
     public float momentOfInertia;
@@ -34,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private int oldTouchCount = 0;
 
     private bool letGoOfDualSteering = false;
+
+    private bool isShooting;
 
     #region Touch Input Events
 
@@ -54,6 +63,13 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+
+    private void Awake()
+    {
+        OnBeginDualSteering += EnableShooting;
+        OnEndDualSteering += DisableShooting;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +83,17 @@ public class PlayerController : MonoBehaviour
         GetInput();
 
         Move();
+        Shoot();
+    }
+
+    void EnableShooting()
+    {
+        isShooting = true;
+    }
+
+    void DisableShooting()
+    {
+        isShooting = false;
     }
 
     private void DetectGestures()
@@ -199,5 +226,26 @@ public class PlayerController : MonoBehaviour
         rotation = Mathf.Clamp(rotation, -rotSpeedCap, rotSpeedCap);
 
         transform.Rotate(Vector3.forward * rotation * Time.deltaTime);
+    }
+
+    private void Shoot()
+    {
+        if (isShooting)
+        {
+            if (Time.time > lastShootTime + shootingCooldown)
+            {
+                lastShootTime = Time.time;
+
+                GameObject bullet = bulletPool.ActivateObject();
+                if (bullet == null) return;
+
+                BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
+
+                bullet.transform.position = transform.position + new Vector3(bulletOffset.x * Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), bulletOffset.y * Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
+                bulletMovement.angle = transform.rotation.eulerAngles.z;
+                bulletMovement.Move();
+            }
+
+        }
     }
 }

@@ -63,12 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Classes\MeshData.cs" />
+    <Compile Include="Assets\Scripts\Classes\ObjectPooler.cs" />
+    <Compile Include="Assets\Scripts\Classes\RNG.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Controllers\ScreenBoundaryController.cs" />
+    <Compile Include="Assets\Scripts\Generators\AsteroidGenerator.cs" />
+    <Compile Include="Assets\Scripts\Managers\AsteroidGenerationRNG.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\GenericRNG.cs" />
+    <Compile Include="Assets\Scripts\Managers\MeshStorage.cs" />
     <Compile Include="Assets\Scripts\Managers\ScoreSystem.cs" />
     <Compile Include="Assets\Scripts\Moov.cs" />
-    <Compile Include="Assets\Scripts\ObjectPooler.cs" />
+    <Compile Include="Assets\Scripts\Objects\Asteroid.cs" />
+    <Compile Include="Assets\Scripts\Objects\BulletMovement.cs" />
+    <Compile Include="Assets\Scripts\Procgen\CyclicPolygonGenerator.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -141,6 +150,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>E:/Unity Projects/Blastoverse/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>E:/Unity Projects/Blastoverse/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>E:/Unity/2019.3.0f6/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
