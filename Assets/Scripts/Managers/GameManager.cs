@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour
         screenHeight = Screen.height;
 
         //mainCamera = Camera.main;
+
+        LocalizedStringManager.Init();
+        LocalizedStringManager.ParseTranslations();
+        LocalizedStringManager.SetCulture("pl-PL");
+
+        Debug.Log(LocalizedStringManager.GetLocalizedString("ui.optionsButton"));
     }
 
     // Start is called before the first frame update

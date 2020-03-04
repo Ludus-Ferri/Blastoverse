@@ -1,0 +1,3 @@
+ui.playButton Graj
+ui.optionsButton Opcje
+ui.quitButton Wyjdź

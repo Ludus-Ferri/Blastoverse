@@ -1,0 +1,3 @@
+ui.playButton Play
+ui.optionsButton Options
+ui.quitButton Quit
