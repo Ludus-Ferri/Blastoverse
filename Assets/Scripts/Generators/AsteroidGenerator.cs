@@ -9,8 +9,9 @@ public class AsteroidGenerator : MonoBehaviour
     [Header("Asteroid Properties")]
     public int minimumVertices;
     public int maximumVertices;
-    public float semiMajorAxis;
-    public float semiMinorAxis;
+    float semiMajorAxis;
+    float semiMinorAxis;
+    public float asteroidSize;
     public float thetaDeviation;
 
     // Start is called before the first frame update
@@ -20,6 +21,8 @@ public class AsteroidGenerator : MonoBehaviour
         {
             asteroidPool.objects[i].GetComponent<Asteroid>().meshID = i;
         }
+        semiMajorAxis = maximumVertices*asteroidSize/50f;
+        semiMinorAxis = minimumVertices*asteroidSize/50f;
 
         // FOR DEBUG PURPOSES ONLY
         GenerateNewAsteroid();
