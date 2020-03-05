@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Camera\CameraEffect.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraEffectManager.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Classes\MeshData.cs" />
     <Compile Include="Assets\Scripts\Classes\ObjectPooler.cs" />
     <Compile Include="Assets\Scripts\Classes\RNG.cs" />
@@ -141,6 +144,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
       <HintPath>E:/Projects/Unity/Blastoverse/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>E:/Projects/Unity/Blastoverse/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>E:/Projects/Unity/Blastoverse/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>

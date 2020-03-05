@@ -728,8 +728,7 @@ MonoBehaviour:
   asteroidPool: {fileID: 130483700}
   minimumVertices: 5
   maximumVertices: 11
-  semiMajorAxis: 1.04
-  semiMinorAxis: 0.9
+  asteroidSize: 0
   thetaDeviation: 80
 --- !u!1 &1241010253
 GameObject:
@@ -1133,6 +1132,8 @@ GameObject:
   - component: {fileID: 1830795939}
   - component: {fileID: 1830795942}
   - component: {fileID: 1830795943}
+  - component: {fileID: 1830795944}
+  - component: {fileID: 1830795945}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1253,6 +1254,41 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: e2d8d5d9d94aa1943970430f26c159a5, type: 2}
+--- !u!114 &1830795944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830795938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b91372b565da84c8e1171b2a73651d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localDisplacement: {x: 0, y: 0, z: 0}
+  localRotation: {x: 0, y: 0, z: 0, w: 0}
+  perlinFrequency: 20
+  perlinRotateFrequency: 20
+  perlinAmplitude: 0.1
+  perlinRotateAmplitude: 20
+  damping: 3
+  trauma: 0
+  traumaExponent: 2.3
+  zPosition: -10
+--- !u!114 &1830795945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830795938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72940c0acc066bc49a5249dc86f2c036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effects: []
 --- !u!1 &1907683487
 GameObject:
   m_ObjectHideFlags: 0
