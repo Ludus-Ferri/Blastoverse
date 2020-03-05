@@ -88,6 +88,9 @@ public class PlayerController : MonoBehaviour
         GetInput();
 
         Move();
+
+        isShooting = Input.GetKey(KeyCode.Space);
+
         Shoot();
     }
 

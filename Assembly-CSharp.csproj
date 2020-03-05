@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Objects\Asteroid.cs" />
     <Compile Include="Assets\Scripts\Objects\BulletMovement.cs" />
     <Compile Include="Assets\Scripts\Procgen\CyclicPolygonGenerator.cs" />
+    <Compile Include="Assets\Scripts\Procgen\MeshSlicer.cs" />
     <Compile Include="Assets\Scripts\Testing.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

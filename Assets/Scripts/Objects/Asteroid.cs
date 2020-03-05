@@ -8,25 +8,41 @@ public class Asteroid : MonoBehaviour
     [HideInInspector]
     public int meshID;
 
+    MeshData meshData;
+
     MeshFilter meshFilter;
-    PolygonCollider2D col;
+    EdgeCollider2D col;
 
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
-        col = GetComponent<PolygonCollider2D>();
+        col = GetComponent<EdgeCollider2D>();
     }
 
-    public void SetMesh()
+    public void SetMesh(MeshData data)
     {
         Mesh mesh = MeshStorage.Instance.GetAsteroidMeshFor(meshID);
 
         meshFilter.mesh = mesh;
+        meshData = data;
 
         Vector2[] colPath = new Vector2[mesh.vertexCount];
         for (int i = 0; i < mesh.vertexCount; i++)
             colPath[i] = new Vector2(mesh.vertices[i].x, mesh.vertices[i].y);
 
-        col.SetPath(0, colPath);
+        col.points = colPath;
+    }
+
+    public void Move()
+    {
+        transform.position = new Vector3(0, 3, 0);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point);
+        }
     }
 }

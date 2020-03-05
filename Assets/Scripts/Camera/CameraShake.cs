@@ -29,8 +29,8 @@ public class CameraShake : CameraEffect
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            InduceMotion(1);
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //    InduceMotion(1);
     }
 
     private void LateUpdate()

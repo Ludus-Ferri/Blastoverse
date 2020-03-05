@@ -43,7 +43,9 @@ public class AsteroidGenerator : MonoBehaviour
         MeshData data = CyclicPolygonGenerator.GeneratePolygon(AsteroidGenerationRNG.Instance.Next(minimumVertices, maximumVertices), semiMajorAxis, semiMinorAxis, thetaDeviation);
 
         MeshStorage.Instance.SetAsteroidMeshFor(asteroid.meshID, data.vertices, data.triangles);
-        asteroid.SetMesh();
+        asteroid.SetMesh(data);
         asteroid.gameObject.SetActive(true);
+
+        asteroid.Move();
     }
 }
