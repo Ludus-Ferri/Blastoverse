@@ -1426,3 +1426,4 @@ MonoBehaviour:
   screenWidth: 0
   screenHeight: 0
   mainCamera: {fileID: 1830795940}
+  playerController: {fileID: 1402696457}

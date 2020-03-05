@@ -63,6 +63,11 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region Generic Events
+    public delegate void OnShootDelegate();
+    public event OnShootDelegate OnShoot;
+    #endregion
+
 
     private void Awake()
     {
@@ -235,6 +240,8 @@ public class PlayerController : MonoBehaviour
             if (Time.time > lastShootTime + shootingCooldown)
             {
                 lastShootTime = Time.time;
+
+                OnShoot?.Invoke();
 
                 GameObject bullet = bulletPool.ActivateObject();
                 if (bullet == null) return;

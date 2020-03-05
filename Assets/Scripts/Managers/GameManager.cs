@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
 
+    public PlayerController playerController;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
