@@ -55,6 +55,8 @@ public class LocalizedStringManager
 
     public static string GetLocalizedString(string baseString)
     {
+        if (!dictionary[currentCulture].ContainsKey(baseString))
+            return baseString;
         return dictionary[currentCulture][baseString];
     }
 }

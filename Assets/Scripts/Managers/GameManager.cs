@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
         LocalizedStringManager.Init();
         LocalizedStringManager.ParseTranslations();
         LocalizedStringManager.SetCulture("pl-PL");
-
-        Debug.Log(LocalizedStringManager.GetLocalizedString("ui.optionsButton"));
     }
 
     // Start is called before the first frame update
