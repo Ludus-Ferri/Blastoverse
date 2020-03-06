@@ -22,14 +22,4 @@ public class MeshStorage : MonoBehaviour
         else asteroidMeshes.Add(id, new Mesh());
         return asteroidMeshes[id];
     }
-
-    public void SetAsteroidMeshFor(int id, Vector3[] verts, int[] tris)
-    {
-        if (!asteroidMeshes.ContainsKey(id))
-            asteroidMeshes[id] = new Mesh();
-
-        asteroidMeshes[id].SetVertices(verts);
-        asteroidMeshes[id].SetTriangles(tris, 0);
-        asteroidMeshes[id].RecalculateNormals();
-    }
 }

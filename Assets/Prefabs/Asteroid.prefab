@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshID: 0
   spawnDistance: 5.86
-  initialMoveSpeed: 4.06
+  initialMoveSpeed: 8
 --- !u!50 &4176192138042248543
 Rigidbody2D:
   serializedVersion: 4

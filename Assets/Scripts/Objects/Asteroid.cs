@@ -29,6 +29,11 @@ public class Asteroid : MonoBehaviour
     {
         Mesh mesh = MeshStorage.Instance.GetAsteroidMeshFor(meshID);
 
+        mesh.Clear();
+        mesh.SetVertices(data.vertices);
+        mesh.SetTriangles(data.triangles, 0);
+        mesh.RecalculateNormals();
+
         meshFilter.mesh = mesh;
         meshData = data;
 
@@ -39,7 +44,7 @@ public class Asteroid : MonoBehaviour
         col.points = colPath;
     }
 
-    public void initialMove()
+    public void InitialMove()
     {
         Vector2 V = Random.insideUnitCircle.normalized;
         transform.position = new Vector3(V.x*spawnDistance, V.y*spawnDistance, 0);
