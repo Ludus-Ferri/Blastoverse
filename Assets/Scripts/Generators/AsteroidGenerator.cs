@@ -17,7 +17,9 @@ public class AsteroidGenerator : MonoBehaviour
     public bool autoSize;
     public float asteroidSize;
 
-
+    [Header("Difficulty")]
+    public float spawnRate;
+    float currentRate;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +34,16 @@ public class AsteroidGenerator : MonoBehaviour
             semiMinorAxis = minimumVertices * asteroidSize / 50f;
         }
 
-        // FOR DEBUG PURPOSES ONLY
-        GenerateNewAsteroid();
+        currentRate = spawnRate;
+    }
+
+    void Update()
+    {
+        currentRate -= Time.deltaTime;
+        if (currentRate < 0)
+        {
+            GenerateNewAsteroid();
+        }
     }
 
     void GenerateNewAsteroid() 
@@ -45,7 +55,7 @@ public class AsteroidGenerator : MonoBehaviour
         MeshStorage.Instance.SetAsteroidMeshFor(asteroid.meshID, data.vertices, data.triangles);
         asteroid.SetMesh(data);
         asteroid.gameObject.SetActive(true);
-
-        asteroid.Move();
+        currentRate = spawnRate;
+        asteroid.initialMove();
     }
 }

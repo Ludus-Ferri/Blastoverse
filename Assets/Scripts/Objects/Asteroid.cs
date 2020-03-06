@@ -8,6 +8,11 @@ public class Asteroid : MonoBehaviour
     [HideInInspector]
     public int meshID;
 
+    public float spawnDistance;
+    public float initialMoveSpeed;
+
+    Rigidbody2D rb2D;
+
     MeshData meshData;
 
     MeshFilter meshFilter;
@@ -17,6 +22,7 @@ public class Asteroid : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         col = GetComponent<EdgeCollider2D>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     public void SetMesh(MeshData data)
@@ -33,9 +39,11 @@ public class Asteroid : MonoBehaviour
         col.points = colPath;
     }
 
-    public void Move()
+    public void initialMove()
     {
-        transform.position = new Vector3(0, 3, 0);
+        Vector2 V = Random.insideUnitCircle.normalized;
+        transform.position = new Vector3(V.x*spawnDistance, V.y*spawnDistance, 0);
+        rb2D.AddForce(-transform.position * initialMoveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

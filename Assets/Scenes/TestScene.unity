@@ -730,9 +730,10 @@ MonoBehaviour:
   maximumVertices: 11
   semiMajorAxis: 1
   semiMinorAxis: 1
-  asteroidSize: 4
   thetaDeviation: 80
   autoSize: 0
+  asteroidSize: 4
+  spawnRate: 1.31
 --- !u!1 &1241010253
 GameObject:
   m_ObjectHideFlags: 0

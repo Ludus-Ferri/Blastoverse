@@ -23,6 +23,7 @@ public class ScreenBoundaryController : MonoBehaviour
 #if UNITY_EDITOR
             Debug.Log($"{collision.gameObject.name} has left the screen!");
 #endif
+
             collision.gameObject.SetActive(false);
         }
 
