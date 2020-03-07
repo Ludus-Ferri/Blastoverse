@@ -58,7 +58,7 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point);
+            MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point, transform.position);
         }
     }
 }

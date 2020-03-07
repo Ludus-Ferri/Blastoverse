@@ -10,7 +10,7 @@ public class CyclicPolygonGenerator
         return new Vector2(semiMajorAxis * Mathf.Cos(theta * Mathf.Deg2Rad), semiMinorAxis * Mathf.Sin(theta * Mathf.Deg2Rad));
     }
 
-    private static List<int> TriangulateConvexPolygon(int n)
+    public static List<int> TriangulateConvexPolygon(int n)
     {
         List<int> tris = new List<int>();
 
