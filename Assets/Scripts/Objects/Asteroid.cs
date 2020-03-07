@@ -10,6 +10,7 @@ public class Asteroid : MonoBehaviour
 
     public float spawnDistance;
     public float initialMoveSpeed;
+    public float moveDeviationScale;
 
     Rigidbody2D rb2D;
 
@@ -46,9 +47,11 @@ public class Asteroid : MonoBehaviour
 
     public void InitialMove()
     {
+        Vector2 ran = Random.insideUnitCircle.normalized; 
         Vector2 V = Random.insideUnitCircle.normalized;
         transform.position = new Vector3(V.x*spawnDistance, V.y*spawnDistance, 0);
-        rb2D.AddForce(-transform.position * initialMoveSpeed);
+        Vector3 forceToAdd = new Vector3(-transform.position.x + ran.x * moveDeviationScale, -transform.position.y + ran.y * moveDeviationScale, 0);
+        rb2D.AddForce((forceToAdd) * initialMoveSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
