@@ -732,7 +732,7 @@ MonoBehaviour:
   semiMinorAxis: 1
   thetaDeviation: 80
   autoSize: 0
-  asteroidSize: 4
+  asteroidSize: 0.4
   spawnRate: 1.31
 --- !u!1 &1241010253
 GameObject:
@@ -1137,6 +1137,7 @@ GameObject:
   - component: {fileID: 1830795942}
   - component: {fileID: 1830795943}
   - component: {fileID: 1830795944}
+  - component: {fileID: 1830795946}
   - component: {fileID: 1830795945}
   m_Layer: 0
   m_Name: Main Camera
@@ -1293,6 +1294,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects: []
+--- !u!114 &1830795946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830795938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790cfd3708f316549b4d9fbb5311f05e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localDisplacement: {x: 0, y: 0, z: 0}
+  localRotation: {x: 0, y: 0, z: 0, w: 0}
+  magnitude: 0.3
+  smoothing: 11
 --- !u!1 &1907683487
 GameObject:
   m_ObjectHideFlags: 0

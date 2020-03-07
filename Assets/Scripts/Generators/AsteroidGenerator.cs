@@ -30,9 +30,11 @@ public class AsteroidGenerator : MonoBehaviour
 
         if (autoSize)
         {
-            semiMajorAxis = maximumVertices * asteroidSize / 50f;
-            semiMinorAxis = minimumVertices * asteroidSize / 50f;
+            semiMajorAxis = maximumVertices / 10f;
+            semiMinorAxis = minimumVertices / 10f;
         }
+        semiMajorAxis *= asteroidSize;
+        semiMinorAxis *= asteroidSize;
 
         currentRate = spawnRate;
     }
