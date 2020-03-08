@@ -9,7 +9,7 @@ public class Asteroid : MonoBehaviour
     public int meshID;
 
     public float spawnDistance;
-    public float initialMoveSpeed;
+    public float initialMoveSpeed, initialMoveRotation;
     public float moveDeviationScale;
 
     public float colliderSizeFactor;
@@ -59,26 +59,37 @@ public class Asteroid : MonoBehaviour
         transform.position = new Vector3(V.x*spawnDistance, V.y*spawnDistance, 0);
         Vector3 forceToAdd = new Vector3(-transform.position.x + ran.x * moveDeviationScale, -transform.position.y + ran.y * moveDeviationScale, 0);
         rb2D.AddForce(forceToAdd * initialMoveSpeed);
+
+        rb2D.AddTorque(initialMoveRotation);
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 velocity, float torque)
     {
         rb2D.AddForce(velocity);
+        rb2D.AddTorque(torque);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            Vector3 vel = collider.GetComponent<Rigidbody2D>().velocity;
+            if (meshData.GetArea() < parentGenerator.areaThreshold)
+                gameObject.SetActive(false);
+            else
+            {
+                Vector3 vel = collider.GetComponent<Rigidbody2D>().velocity;
 
-            MeshData[] slices = MeshSlicer.Slice(meshData, vel, collider.transform.position, transform.position, transform.rotation, out Vector2 posCentroid, out Vector2 negCentroid);
-            collider.gameObject.SetActive(false);
+                MeshData[] slices = MeshSlicer.Slice(meshData, vel, collider.transform.position, transform.position, transform.rotation, out Vector2 posCentroid, out Vector2 negCentroid);
+                collider.gameObject.SetActive(false);
 
-            if (slices == null) return;
+                if (slices == null) return;
+
+                gameObject.SetActive(false);
+
+                parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
+            }
+
             
-            gameObject.SetActive(false);
-            parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
         }
     }
 }

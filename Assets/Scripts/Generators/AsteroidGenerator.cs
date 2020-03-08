@@ -20,10 +20,13 @@ public class AsteroidGenerator : MonoBehaviour
     [Header("Asteroid Splitting")]
     public float areaThreshold;
     public float momentumFactor;
+    public float splitForce;
+    public float splitRotation;
 
     [Header("Difficulty")]
     public float spawnRate;
     float currentRate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,22 +74,28 @@ public class AsteroidGenerator : MonoBehaviour
     public void GenerateAsteroidSlices(MeshData leftData, MeshData rightData, Vector2 leftCentroid, Vector2 rightCentroid, Vector3 preVelocity, Vector3 slicerVelocity)
     {
         Asteroid leftAsteroid, rightAsteroid;
+
+        Vector3 preVelLeft = Quaternion.Euler(0, 0, 90) * slicerVelocity * splitForce;
+        Vector3 preVelRight = Quaternion.Euler(0, 0, -90) * slicerVelocity * splitForce;
+
         if (leftData.GetArea() > areaThreshold)
         {
             leftAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
+            leftAsteroid.parentGenerator = this;
             leftAsteroid.SetMesh(leftData);
             leftAsteroid.transform.position = leftCentroid;
             leftAsteroid.transform.rotation = Quaternion.identity;
-            leftAsteroid.Move((preVelocity + slicerVelocity - Vector3.right) * momentumFactor);
+            leftAsteroid.Move((preVelocity + slicerVelocity + preVelLeft) * momentumFactor, AsteroidGenerationRNG.Instance.NextFloat(-1, 1) * splitRotation);
         }
 
         if (rightData.GetArea() > areaThreshold)
         {
             rightAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
+            rightAsteroid.parentGenerator = this;
             rightAsteroid.SetMesh(rightData);
             rightAsteroid.transform.position = rightCentroid;
             rightAsteroid.transform.rotation = Quaternion.identity;
-            rightAsteroid.Move((preVelocity + slicerVelocity + Vector3.right) * momentumFactor);
+            rightAsteroid.Move((preVelocity + slicerVelocity + preVelRight) * momentumFactor, AsteroidGenerationRNG.Instance.NextFloat(-1, 1) * splitRotation);
         }
 
         

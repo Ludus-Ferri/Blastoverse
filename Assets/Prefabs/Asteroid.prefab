@@ -97,6 +97,7 @@ MonoBehaviour:
   meshID: 0
   spawnDistance: 5.86
   initialMoveSpeed: 8
+  initialMoveRotation: 18
   moveDeviationScale: 3.64
   colliderSizeFactor: 1.1
   parentGenerator: {fileID: 0}

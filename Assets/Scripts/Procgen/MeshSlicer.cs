@@ -62,9 +62,6 @@ public class MeshSlicer
         }
         
         Vector2 slicePoint = otherHit.point - meshPos;
-        Debug.DrawLine(hitPoint + meshPos, slicePoint + meshPos, Color.black, 10);
-        Debug.Log(hitPoint + meshPos);
-        Debug.Log(slicePoint + meshPos);
 
         MeshData positiveSliceData = new MeshData(), negativeSliceData = new MeshData();
 

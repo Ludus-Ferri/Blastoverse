@@ -814,8 +814,10 @@ MonoBehaviour:
   thetaDeviation: 80
   autoSize: 0
   asteroidSize: 0.4
-  areaThreshold: 0.1
-  momentumFactor: 20
+  areaThreshold: 0.03
+  momentumFactor: 5
+  splitForce: 0.3
+  splitRotation: 30
   spawnRate: 1.31
 --- !u!1 &1241010253
 GameObject:
