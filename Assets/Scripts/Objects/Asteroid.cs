@@ -54,7 +54,7 @@ public class Asteroid : MonoBehaviour
         Vector2 V = Random.insideUnitCircle.normalized;
         transform.position = new Vector3(V.x*spawnDistance, V.y*spawnDistance, 0);
         Vector3 forceToAdd = new Vector3(-transform.position.x + ran.x * moveDeviationScale, -transform.position.y + ran.y * moveDeviationScale, 0);
-        rb2D.AddForce((forceToAdd) * initialMoveSpeed);
+        rb2D.AddForce(forceToAdd * initialMoveSpeed);
     }
 
     public void Move(Vector3 velocity)
@@ -62,17 +62,19 @@ public class Asteroid : MonoBehaviour
         rb2D.AddForce(velocity);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        if (collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            MeshData[] slices = MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point, transform.position, out Vector2 posCentroid, out Vector2 negCentroid);
+            Vector3 vel = collider.GetComponent<Rigidbody2D>().velocity;
+
+            MeshData[] slices = MeshSlicer.Slice(meshData, vel, collider.transform.position, transform.position, out Vector2 posCentroid, out Vector2 negCentroid);
+            collider.gameObject.SetActive(false);
 
             if (slices == null) return;
             
             gameObject.SetActive(false);
-            parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, collision.rigidbody.velocity);
-            collision.gameObject.SetActive(false);
+            parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
         }
     }
 }
