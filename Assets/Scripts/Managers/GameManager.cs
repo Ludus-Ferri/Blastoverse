@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     public PlayerController playerController;
 
+    [Header("Level Properties")]
+    public Color backgroundColor;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -37,6 +40,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        mainCamera.backgroundColor = backgroundColor;
     }
 }

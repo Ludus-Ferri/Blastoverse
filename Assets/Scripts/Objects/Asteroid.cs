@@ -75,7 +75,7 @@ public class Asteroid : MonoBehaviour
         {
             float area = meshData.GetArea();
 
-            GameManager.Instance.mainCamera.GetComponent<CameraShake>().InduceMotion(area * (transform.position - GameManager.Instance.playerController.transform.position).magnitude / 10f);
+            GameManager.Instance.mainCamera.GetComponent<CameraShake>().InduceMotion(area / (transform.position - GameManager.Instance.playerController.transform.position).magnitude);
 
             if (area < parentGenerator.areaThreshold)
                 gameObject.SetActive(false);

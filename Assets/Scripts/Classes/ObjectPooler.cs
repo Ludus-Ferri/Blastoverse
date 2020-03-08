@@ -19,6 +19,7 @@ public class ObjectPooler : MonoBehaviour
             GameObject obj = Instantiate(objectPrefab);
             obj.SetActive(false);
             obj.tag = "Poolable";
+            obj.transform.parent = transform;
 
             objects.Add(obj);
         }
