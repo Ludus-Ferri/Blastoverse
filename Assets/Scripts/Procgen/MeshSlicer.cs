@@ -28,7 +28,7 @@ public class MeshSlicer
     /// <param name="negCentroid">Position of the negative mesh's centroid.</param>
     /// <param name="posCentroid">Position of the positive mesh's centroid.</param>
     /// <returns>Two MeshDatas of sliced meshes. Index 0 corresponds to the left-side slice, index 1 to the right-side slice.</returns>
-    public static MeshData[] Slice(MeshData data, Vector2 raycastDir, Vector2 hitPoint, Vector2 meshPos, out Vector2 posCentroid, out Vector2 negCentroid)
+    public static MeshData[] Slice(MeshData data, Vector2 raycastDir, Vector2 hitPoint, Vector2 meshPos, Quaternion meshRotation, out Vector2 posCentroid, out Vector2 negCentroid)
     {
         // Find hit points
         Ray ray = new Ray(hitPoint, raycastDir);
@@ -72,7 +72,7 @@ public class MeshSlicer
 
         List<Vector3> positiveVertices = new List<Vector3>(), negativeVertices = new List<Vector3>();
 
-        foreach (Vector2 v in data.vertices) 
+        foreach (Vector2 v in data.GetRotatedVertices(-meshRotation.eulerAngles.z)) 
         { 
             float pointSide = GetLineSideOfPoint(hitPoint, slicePoint, v);
 

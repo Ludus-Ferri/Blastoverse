@@ -76,6 +76,7 @@ public class AsteroidGenerator : MonoBehaviour
             leftAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
             leftAsteroid.SetMesh(leftData);
             leftAsteroid.transform.position = leftCentroid;
+            leftAsteroid.transform.rotation = Quaternion.identity;
             leftAsteroid.Move((preVelocity + slicerVelocity - Vector3.right) * momentumFactor);
         }
 
@@ -84,6 +85,7 @@ public class AsteroidGenerator : MonoBehaviour
             rightAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
             rightAsteroid.SetMesh(rightData);
             rightAsteroid.transform.position = rightCentroid;
+            rightAsteroid.transform.rotation = Quaternion.identity;
             rightAsteroid.Move((preVelocity + slicerVelocity + Vector3.right) * momentumFactor);
         }
 

@@ -72,7 +72,7 @@ public class Asteroid : MonoBehaviour
         {
             Vector3 vel = collider.GetComponent<Rigidbody2D>().velocity;
 
-            MeshData[] slices = MeshSlicer.Slice(meshData, vel, collider.transform.position, transform.position, out Vector2 posCentroid, out Vector2 negCentroid);
+            MeshData[] slices = MeshSlicer.Slice(meshData, vel, collider.transform.position, transform.position, transform.rotation, out Vector2 posCentroid, out Vector2 negCentroid);
             collider.gameObject.SetActive(false);
 
             if (slices == null) return;

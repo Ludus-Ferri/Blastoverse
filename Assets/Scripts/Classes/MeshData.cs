@@ -20,4 +20,14 @@ public struct MeshData
 
         return Mathf.Abs(area / 2);
     }
+
+    // Rotates vertices about the origin (0, 0)
+    public Vector3[] GetRotatedVertices(float rotation)
+    {
+        Vector3[] result = new Vector3[vertices.Length];
+        for (int i = 0; i < vertices.Length; i++)
+            result[i] = new Vector3(vertices[i].x * Mathf.Cos(rotation * Mathf.Deg2Rad) - vertices[i].y * Mathf.Sin(rotation * Mathf.Deg2Rad),
+                vertices[i].x * Mathf.Sin(rotation * Mathf.Deg2Rad) + vertices[i].y * Mathf.Cos(rotation * Mathf.Deg2Rad));
+        return result;
+    }
 }
