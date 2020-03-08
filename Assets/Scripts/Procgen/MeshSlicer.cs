@@ -88,7 +88,10 @@ public class MeshSlicer
         posCentroid = GetCentroid(positiveVertices);
         negCentroid = GetCentroid(negativeVertices);
 
-        Vector2 pc = posCentroid, nc = negCentroid;
+        Vector3 pc = posCentroid, nc = negCentroid;
+
+        for (int i = 0; i < positiveVertices.Count; i++) positiveVertices[i] -= pc;
+        for (int i = 0; i < negativeVertices.Count; i++) negativeVertices[i] -= nc;
 
         positiveVertices = positiveVertices.OrderBy(v => Mathf.Atan2(v.y - pc.y, v.x - pc.x)).ToList();
         negativeVertices = negativeVertices.OrderBy(v => Mathf.Atan2(v.y - nc.y, v.x - nc.x)).ToList();
