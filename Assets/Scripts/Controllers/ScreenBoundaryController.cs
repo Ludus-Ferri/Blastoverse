@@ -20,10 +20,6 @@ public class ScreenBoundaryController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Poolable"))
         {
-#if UNITY_EDITOR
-            Debug.Log($"{collision.gameObject.name} has left the screen!");
-#endif
-
             collision.gameObject.SetActive(false);
         }
 

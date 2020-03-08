@@ -54,7 +54,7 @@ public class MeshSlicer
             Debug.LogError("No slicePoint collider found!");
             Debug.Log($"First hit point: {firstHit.point.x} {firstHit.point.y}");
 
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
 
             posCentroid = Vector2.zero;
             negCentroid = Vector2.zero;
