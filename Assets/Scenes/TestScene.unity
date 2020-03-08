@@ -814,7 +814,7 @@ MonoBehaviour:
   thetaDeviation: 80
   autoSize: 0
   asteroidSize: 0.4
-  areaThreshold: 0.03
+  areaThreshold: 0.08
   momentumFactor: 5
   splitForce: 0.3
   splitRotation: 30
@@ -1018,6 +1018,7 @@ MonoBehaviour:
   bulletPool: {fileID: 1393788222}
   shootingCooldown: 0.1
   bulletOffset: {x: 0.55, y: 0.55}
+  cameraShake: {fileID: 1830795944}
   momentOfInertia: 9
   rotSpeedCap: 600
 --- !u!1 &1421177035
@@ -1360,7 +1361,7 @@ MonoBehaviour:
   localRotation: {x: 0, y: 0, z: 0, w: 0}
   perlinFrequency: 20
   perlinRotateFrequency: 20
-  perlinAmplitude: 0.1
+  perlinAmplitude: 0.4
   perlinRotateAmplitude: 8
   damping: 3
   trauma: 0
@@ -1532,4 +1533,5 @@ MonoBehaviour:
   screenWidth: 0
   screenHeight: 0
   mainCamera: {fileID: 1830795940}
+  mainEffectManager: {fileID: 0}
   playerController: {fileID: 1402696457}

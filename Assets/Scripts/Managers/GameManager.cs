@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int screenWidth, screenHeight;
 
     public Camera mainCamera;
+    public CameraEffectManager mainEffectManager;
 
     public PlayerController playerController;
 

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public ObjectPooler bulletPool;
     public float shootingCooldown;
     public Vector2 bulletOffset;
+    public CameraShake cameraShake;
 
     private float lastShootTime = 0;
 
@@ -244,10 +245,11 @@ public class PlayerController : MonoBehaviour
             {
                 lastShootTime = Time.time;
 
-                OnShoot?.Invoke();
-
                 GameObject bullet = bulletPool.ActivateObject();
                 if (bullet == null) return;
+
+                OnShoot?.Invoke();
+                cameraShake.InduceMotion(0.1f);
 
                 BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
 

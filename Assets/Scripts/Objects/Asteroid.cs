@@ -73,7 +73,11 @@ public class Asteroid : MonoBehaviour
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            if (meshData.GetArea() < parentGenerator.areaThreshold)
+            float area = meshData.GetArea();
+
+            GameManager.Instance.mainCamera.GetComponent<CameraShake>().InduceMotion(area * (transform.position - GameManager.Instance.playerController.transform.position).magnitude / 10f);
+
+            if (area < parentGenerator.areaThreshold)
                 gameObject.SetActive(false);
             else
             {
@@ -87,6 +91,8 @@ public class Asteroid : MonoBehaviour
                 gameObject.SetActive(false);
 
                 parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
+
+                
             }
 
             
