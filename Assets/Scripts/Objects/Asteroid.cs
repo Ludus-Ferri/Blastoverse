@@ -19,6 +19,9 @@ public class Asteroid : MonoBehaviour
     MeshFilter meshFilter;
     EdgeCollider2D col;
 
+    [HideInInspector]
+    public AsteroidGenerator parentGenerator;
+
     private void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
@@ -54,11 +57,22 @@ public class Asteroid : MonoBehaviour
         rb2D.AddForce((forceToAdd) * initialMoveSpeed);
     }
 
+    public void Move(Vector3 velocity)
+    {
+        rb2D.AddForce(velocity);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point, transform.position);
+            MeshData[] slices = MeshSlicer.Slice(meshData, collision.rigidbody.velocity, collision.GetContact(0).point, transform.position, out Vector2 posCentroid, out Vector2 negCentroid);
+
+            if (slices == null) return;
+            
+            gameObject.SetActive(false);
+            parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, collision.rigidbody.velocity);
+            collision.gameObject.SetActive(false);
         }
     }
 }

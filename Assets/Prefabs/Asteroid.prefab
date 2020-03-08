@@ -98,6 +98,7 @@ MonoBehaviour:
   spawnDistance: 5.86
   initialMoveSpeed: 8
   moveDeviationScale: 3.64
+  parentGenerator: {fileID: 0}
 --- !u!50 &4176192138042248543
 Rigidbody2D:
   serializedVersion: 4

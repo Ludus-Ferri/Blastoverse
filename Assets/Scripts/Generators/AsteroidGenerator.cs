@@ -17,6 +17,10 @@ public class AsteroidGenerator : MonoBehaviour
     public bool autoSize;
     public float asteroidSize;
 
+    [Header("Asteroid Splitting")]
+    public float areaThreshold;
+    public float momentumFactor;
+
     [Header("Difficulty")]
     public float spawnRate;
     float currentRate;
@@ -56,7 +60,34 @@ public class AsteroidGenerator : MonoBehaviour
 
         asteroid.SetMesh(data);
         asteroid.gameObject.SetActive(true);
-        currentRate = spawnRate;
+
         asteroid.InitialMove();
+
+        asteroid.parentGenerator = this;
+
+        currentRate = spawnRate;
+    }
+
+    public void GenerateAsteroidSlices(MeshData leftData, MeshData rightData, Vector2 leftCentroid, Vector2 rightCentroid, Vector3 preVelocity, Vector3 slicerVelocity)
+    {
+        Asteroid leftAsteroid, rightAsteroid;
+        if (leftData.GetArea() > areaThreshold)
+        {
+            leftAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
+            leftAsteroid.SetMesh(leftData);
+            leftAsteroid.transform.position = leftCentroid;
+            leftAsteroid.Move((preVelocity + slicerVelocity - Vector3.right) * momentumFactor);
+        }
+
+        if (rightData.GetArea() > areaThreshold)
+        {
+            rightAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
+            rightAsteroid.SetMesh(rightData);
+            rightAsteroid.transform.position = rightCentroid;
+            rightAsteroid.Move((preVelocity + slicerVelocity + Vector3.right) * momentumFactor);
+        }
+
+        
+
     }
 }

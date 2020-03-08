@@ -595,7 +595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835983154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.062083364, y: 2.3900874, z: -6.8588214}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -763,6 +763,8 @@ MonoBehaviour:
   thetaDeviation: 80
   autoSize: 0
   asteroidSize: 0.4
+  areaThreshold: 0.1
+  momentumFactor: 20
   spawnRate: 1.31
 --- !u!1 &1241010253
 GameObject:

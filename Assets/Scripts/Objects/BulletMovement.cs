@@ -19,4 +19,10 @@ public class BulletMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
         rb2d.AddForce(new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)) * force);
     }
+
+    private IEnumerator Disable()
+    {
+        yield return null;
+        gameObject.SetActive(false);
+    }
 }
