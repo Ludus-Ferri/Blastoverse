@@ -12,6 +12,8 @@ public class Asteroid : MonoBehaviour
     public float initialMoveSpeed;
     public float moveDeviationScale;
 
+    public float colliderSizeFactor;
+
     Rigidbody2D rb2D;
 
     MeshData meshData;
@@ -41,9 +43,11 @@ public class Asteroid : MonoBehaviour
         meshFilter.mesh = mesh;
         meshData = data;
 
-        Vector2[] colPath = new Vector2[mesh.vertexCount];
+        Vector2[] colPath = new Vector2[mesh.vertexCount + 1];
         for (int i = 0; i < mesh.vertexCount; i++)
-            colPath[i] = new Vector2(mesh.vertices[i].x, mesh.vertices[i].y);
+            colPath[i] = new Vector2(mesh.vertices[i].x * colliderSizeFactor, mesh.vertices[i].y * colliderSizeFactor);
+
+        colPath[mesh.vertexCount] = colPath[0];
 
         col.points = colPath;
     }

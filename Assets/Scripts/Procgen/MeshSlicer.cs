@@ -32,23 +32,29 @@ public class MeshSlicer
     {
         // Find hit points
         Ray ray = new Ray(hitPoint, raycastDir);
-        RaycastHit2D firstHit = Physics2D.Raycast(ray.origin, ray.direction, 2f, LayerMask.GetMask("Asteroid"));
+        RaycastHit2D firstHit = Physics2D.Raycast(ray.origin, ray.direction, 0.5f, LayerMask.GetMask("Asteroid"));
         RaycastHit2D otherHit = Physics2D.Raycast(new Vector3(firstHit.point.x, firstHit.point.y) + ray.direction * 0.05f, ray.direction, 2f, LayerMask.GetMask("Asteroid"));
-        hitPoint = firstHit.point - meshPos;
 
         if (firstHit.collider == null)
         {
             Debug.LogError("No firstHit collider found!");
+            Debug.Log($"Bullet pos: {hitPoint.x} {hitPoint.y}");
+
+            //Time.timeScale = 0;
 
             posCentroid = Vector2.zero;
             negCentroid = Vector2.zero;
             return null;
         }
 
+        hitPoint = firstHit.point - meshPos;
+
         if (otherHit.collider == null)
         {
             Debug.LogError("No slicePoint collider found!");
             Debug.Log($"First hit point: {firstHit.point.x} {firstHit.point.y}");
+
+            Time.timeScale = 0;
 
             posCentroid = Vector2.zero;
             negCentroid = Vector2.zero;
