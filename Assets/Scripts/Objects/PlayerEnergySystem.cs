@@ -13,7 +13,7 @@ public class PlayerEnergySystem : MonoBehaviour
     public float maxEnergy;
     public float cooldown;
 
-    float lastShotTime;
+    float lastDamageTime;
     float regeneration;
 
     private void Start()
@@ -24,19 +24,22 @@ public class PlayerEnergySystem : MonoBehaviour
 
     private void PlayerController_OnShoot()
     {
-        energy -= shotCost;
-        lastShotTime = Time.time;
-        regeneration = energyRegeneration;
+        TakeDamage(shotCost);
+    }
 
+    void TakeDamage(float damage)
+    {
+        energy -= damage;
+        lastDamageTime = Time.time;
+        regeneration = energyRegeneration;
         UIManager.Instance.energyBarController.Flash();
     }
 
-    // Update is called once per sec
     void Update()
     {
         energy = Mathf.Clamp(energy, 0, maxEnergy);
 
-        if (Time.time - lastShotTime > cooldown)
+        if (Time.time - lastDamageTime > cooldown)
         {
             if (energy + regeneration * Time.deltaTime <= maxEnergy)
             {
