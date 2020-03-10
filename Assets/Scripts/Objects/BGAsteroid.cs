@@ -58,9 +58,12 @@ public class BGAsteroid : MonoBehaviour
 
     public void SetColor(Color color)
     {
-        depth = baseDepth + AsteroidGenerationRNG.Instance.NextFloat(-1, 1);
-        meshRenderer.material.SetColor("_BaseColor", Color.Lerp(Color.white, color, depth / baseDepth - 0.15f));
+        meshRenderer.material.SetColor("_BaseColor", new Color(1, 1, 1, depth / baseDepth - 0.85f));
+    }
 
+    public void InitPosition()
+    {
+        depth = baseDepth + AsteroidGenerationRNG.Instance.NextFloat(-1, 1);
     }
 
     public void InitialMove()

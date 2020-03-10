@@ -41,12 +41,21 @@ public class BGAsteroidGenerator : MonoBehaviour
 
     void GenerateNewAsteroid()
     {
-        BGAsteroid asteroid = asteroidPool.GetPooledObject().GetComponent<BGAsteroid>();
+        BGAsteroid asteroid;
+        try
+        {
+            asteroid = asteroidPool.GetPooledObject().GetComponent<BGAsteroid>();
+        }
+        catch (System.NullReferenceException)
+        {
+            return;
+        }
 
         MeshData data = CyclicPolygonGenerator.GeneratePolygon(AsteroidGenerationRNG.Instance.Next(minimumVertices, maximumVertices), semiMajorAxis * AsteroidGenerationRNG.Instance.NextFloat(0.8f, 1.25f), semiMinorAxis * AsteroidGenerationRNG.Instance.NextFloat(0.8f, 1.25f), thetaDeviation);
 
         asteroid.gameObject.SetActive(true);
         asteroid.SetMesh(data);
+        asteroid.InitPosition();
         asteroid.SetColor(GameManager.Instance.backgroundColor);
 
         asteroid.InitialMove();
