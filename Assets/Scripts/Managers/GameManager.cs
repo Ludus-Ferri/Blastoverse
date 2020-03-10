@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CameraEffectManager mainEffectManager;
 
     public PlayerController playerController;
+    public PlayerEnergySystem playerEnergySystem;
 
     [Header("Level Properties")]
     public Color backgroundColor;
