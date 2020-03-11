@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private float tapCount = 0;
     private Touch lastTouch;
 
+    private PolygonCollider2D col;
+
     private float oldDeltaY = 0;
     private int oldTouchCount = 0;
 
@@ -74,6 +76,8 @@ public class PlayerController : MonoBehaviour
     {
         OnBeginDualSteering += EnableShooting;
         OnEndDualSteering += DisableShooting;
+
+        col = GetComponent<PolygonCollider2D>();
     }
 
     // Start is called before the first frame update
@@ -258,6 +262,15 @@ public class PlayerController : MonoBehaviour
                 bulletMovement.Move();
             }
 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.LogFormat("Collided with {0}", collision.gameObject.name);
+        if (collision.gameObject.name == "Asteroid(Clone)")
+        {
+            GameManager.Instance.OnLoss();
         }
     }
 }
