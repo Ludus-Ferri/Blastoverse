@@ -95,11 +95,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshID: 0
-  spawnDistance: 5.86
+  spawnDistance: 5.67
   initialMoveSpeed: 8
   initialMoveRotation: 18
-  moveDeviationScale: 3.64
+  moveDeviationScale: 2.24
   colliderSizeFactor: 1.1
+  division: 1
+  destruction: 8
   parentGenerator: {fileID: 0}
 --- !u!50 &4176192138042248543
 Rigidbody2D:

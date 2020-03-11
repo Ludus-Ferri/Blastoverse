@@ -433,6 +433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scorePerSecond: 20
   scoreMultiplier: 1
+  difficulity: 0
   scoreText: {fileID: 646080602}
   zeroColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0.18431373}
   zeroPadding: 8

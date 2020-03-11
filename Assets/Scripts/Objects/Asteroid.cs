@@ -14,6 +14,11 @@ public class Asteroid : MonoBehaviour
 
     public float colliderSizeFactor;
 
+    [Header("Destroy points")]
+    public float division;
+    public float destruction;
+
+
     Rigidbody2D rb2D;
 
     MeshData meshData;
@@ -78,7 +83,10 @@ public class Asteroid : MonoBehaviour
             GameManager.Instance.mainCamera.GetComponent<CameraShake>().InduceMotion(area / (transform.position - GameManager.Instance.playerController.transform.position).magnitude);
 
             if (area < parentGenerator.areaThreshold)
+            {
                 gameObject.SetActive(false);
+                ScoreSystem.Instance.IncreaseScore((long)destruction);
+            }
             else
             {
                 Vector3 vel = collider.GetComponent<Rigidbody2D>().velocity;
@@ -92,7 +100,7 @@ public class Asteroid : MonoBehaviour
 
                 parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
 
-                
+                ScoreSystem.Instance.IncreaseScore((long)division);
             }
 
             
