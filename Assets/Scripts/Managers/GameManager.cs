@@ -19,12 +19,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Mechanics")]
     public float timeScaleSmoothing;
-    float targetTimeScale;
+    public float targetTimeScale;
+
+    private Animator anim;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         if (Instance != this) Destroy(gameObject);
+
+        anim = GetComponent<Animator>();
 
         screenWidth = Screen.width;
         screenHeight = Screen.height;
@@ -41,19 +45,27 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(UpdateTimeScale());
     }
 
     // Update is called once per frame
     void Update()
     {
         mainCamera.backgroundColor = backgroundColor;
+    }
 
-        Time.timeScale = Mathf.Lerp(Time.timeScale, targetTimeScale, timeScaleSmoothing * Time.unscaledDeltaTime);
+    IEnumerator UpdateTimeScale()
+    {
+        while (true)
+        {
+            Time.timeScale = targetTimeScale;
+            yield return null;
+        }
+        
     }
 
     public void OnLoss()
     {
-        targetTimeScale = 0;
+        anim.SetTrigger("DestructionPause");
     }
 }

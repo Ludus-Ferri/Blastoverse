@@ -2143,6 +2143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1988660418}
   - component: {fileID: 1988660419}
+  - component: {fileID: 1988660420}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -2184,6 +2185,26 @@ MonoBehaviour:
   playerEnergySystem: {fileID: 1402696458}
   backgroundColor: {r: 0.16862746, g: 0.3764706, b: 0.6039216, a: 1}
   timeScaleSmoothing: 2
+  targetTimeScale: 0
+--- !u!95 &1988660420
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988660417}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30e1d6efbc93a7f4c947dc9e57416640, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2109537261
 GameObject:
   m_ObjectHideFlags: 0
