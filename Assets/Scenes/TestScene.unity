@@ -1960,6 +1960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localDisplacement: {x: 0, y: 0, z: 0}
   localRotation: {x: 0, y: 0, z: 0, w: 0}
+  zoom: 0
   perlinFrequency: 20
   perlinRotateFrequency: 20
   perlinAmplitude: 0.4
@@ -1995,6 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localDisplacement: {x: 0, y: 0, z: 0}
   localRotation: {x: 0, y: 0, z: 0, w: 0}
+  zoom: 0
   magnitude: 0.3
   smoothing: 11
 --- !u!1 &1856259338
@@ -2185,7 +2187,8 @@ MonoBehaviour:
   playerEnergySystem: {fileID: 1402696458}
   backgroundColor: {r: 0.16862746, g: 0.3764706, b: 0.6039216, a: 1}
   timeScaleSmoothing: 2
-  targetTimeScale: 0
+  targetTimeScale: 1
+  targetZoom: 5
 --- !u!95 &1988660420
 Animator:
   serializedVersion: 3

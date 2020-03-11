@@ -21,6 +21,10 @@ public class GameManager : MonoBehaviour
     public float timeScaleSmoothing;
     public float targetTimeScale;
 
+    public float targetZoom;
+
+    float defaultZoom;
+
     private Animator anim;
 
     private void Awake()
@@ -29,6 +33,8 @@ public class GameManager : MonoBehaviour
         if (Instance != this) Destroy(gameObject);
 
         anim = GetComponent<Animator>();
+
+        defaultZoom = mainCamera.orthographicSize;
 
         screenWidth = Screen.width;
         screenHeight = Screen.height;
@@ -45,7 +51,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(UpdateTimeScale());
+        StartCoroutine(UnscaledUpdate());
     }
 
     // Update is called once per frame
@@ -54,11 +60,13 @@ public class GameManager : MonoBehaviour
         mainCamera.backgroundColor = backgroundColor;
     }
 
-    IEnumerator UpdateTimeScale()
+    IEnumerator UnscaledUpdate()
     {
         while (true)
         {
             Time.timeScale = targetTimeScale;
+            mainCamera.orthographicSize = targetZoom;
+
             yield return null;
         }
         

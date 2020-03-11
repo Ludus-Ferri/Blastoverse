@@ -33,7 +33,7 @@ public class CameraShake : CameraEffect
         //    InduceMotion(1);
     }
 
-    private void LateUpdate()
+    public override void Perform()
     {
         float shakeStrength = Mathf.Pow(trauma, traumaExponent);
 
