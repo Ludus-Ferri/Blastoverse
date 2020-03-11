@@ -9,13 +9,13 @@ using UnityEngine;
 public class CameraEffectManager : MonoBehaviour
 {
     public List<CameraEffect> effects;
-    Dictionary<string, CameraEffect> effectDict;
+    Dictionary<Type, CameraEffect> effectDict;
 
     Camera cam;
 
-    public CameraEffect GetEffect(string name)
+    public T GetEffect<T>() where T : CameraEffect
     {
-        return effectDict[name];
+        return (T)effectDict[typeof(T)];
     }
 
     private void Awake()
@@ -23,9 +23,9 @@ public class CameraEffectManager : MonoBehaviour
         effects = GetComponents<CameraEffect>().ToList();
         cam = GetComponent<Camera>();
 
-        effectDict = new Dictionary<string, CameraEffect>();
+        effectDict = new Dictionary<Type, CameraEffect>();
         foreach (CameraEffect effect in effects)
-            effectDict.Add(effect.GetType().Name, effect);
+            effectDict.Add(effect.GetType(), effect);
 
         StartCoroutine(EvaluateEffects());
     }

@@ -74,6 +74,26 @@ public class GameManager : MonoBehaviour
 
     public void OnLoss()
     {
+        playerController.controlsEnabled = false;
+
+        StartCoroutine(PlayerExplodeCameraShake());
+
         anim.SetTrigger("DestructionPause");
+    }
+
+    IEnumerator PlayerExplodeCameraShake()
+    {
+        float time = Time.unscaledTime;
+
+        CameraShake shake = mainEffectManager.GetEffect<CameraShake>();
+
+        while (Time.unscaledTime - time < 1.67f)
+        {
+            shake.InduceMotion(0.5f * Time.unscaledDeltaTime);
+            yield return null;
+        }
+
+        shake.InduceMotion(3f);
+        yield return null;
     }
 }
