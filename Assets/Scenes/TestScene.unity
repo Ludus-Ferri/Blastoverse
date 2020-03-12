@@ -2039,6 +2039,8 @@ MonoBehaviour:
   timeScaleSmoothing: 2
   targetTimeScale: 1
   targetZoom: 5
+  playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
+    type: 3}
 --- !u!95 &1988660420
 Animator:
   serializedVersion: 3

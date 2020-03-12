@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     public float targetZoom;
 
+    [Header("Particles")]
+    public GameObject playerExplosionParticle;
+
     float defaultZoom;
 
     private Animator anim;
@@ -87,11 +90,14 @@ public class GameManager : MonoBehaviour
 
         CameraShake shake = mainEffectManager.GetEffect<CameraShake>();
 
-        while (Time.unscaledTime - time < 1.67f)
+        while (Time.unscaledTime - time < 1.9f)
         {
             shake.InduceMotion(0.5f * Time.unscaledDeltaTime);
             yield return null;
         }
+
+        Instantiate(playerExplosionParticle, playerController.transform.position + Vector3.forward * -1, Quaternion.identity);
+        playerController.gameObject.SetActive(false);
 
         shake.InduceMotion(3f);
         yield return null;
