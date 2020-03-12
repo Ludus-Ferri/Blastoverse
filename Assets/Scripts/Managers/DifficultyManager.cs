@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
+    public static DifficultyManager Instance;
     public AsteroidGenerator asteroidGen;
 
-    public static DifficultyManager Instance;
     public enum Level
     {
-        Very_Easy, Easy, Normal, Hard, Pro
+        VeryEasy, Easy, Normal, Hard, Pro
     }
+
     Dictionary<Level, int> maxEnergies;
     Dictionary<Level, int> energyRegens;
     Dictionary<Level, int> regenAccels;
     Dictionary<Level, float> spawnTime;
     Dictionary<Level, int> minVert;
     Dictionary<Level, int> maxVert;
+
     public Level currentLevel;
     
     // Start is called before the first frame update
@@ -27,7 +29,7 @@ public class DifficultyManager : MonoBehaviour
 
         maxEnergies = new Dictionary<Level, int>()
         {
-            { Level.Very_Easy, 1900 },
+            { Level.VeryEasy, 1900 },
             { Level.Easy, 1500 },
             { Level.Normal, 1200 },
             { Level.Hard, 900 },
@@ -36,7 +38,7 @@ public class DifficultyManager : MonoBehaviour
 
         energyRegens = new Dictionary<Level, int>()
         {
-            { Level.Very_Easy, 50 },
+            { Level.VeryEasy, 50 },
             { Level.Easy, 40 },
             { Level.Normal, 30 },
             { Level.Hard, 25 },
@@ -45,7 +47,7 @@ public class DifficultyManager : MonoBehaviour
 
         regenAccels = new Dictionary<Level, int>()
         {
-            { Level.Very_Easy, 15 },
+            { Level.VeryEasy, 15 },
             { Level.Easy, 12 },
             { Level.Normal, 10 },
             { Level.Hard, 9 },
@@ -54,7 +56,7 @@ public class DifficultyManager : MonoBehaviour
 
         spawnTime = new Dictionary<Level, float>()
         {
-            { Level.Very_Easy, 3f },
+            { Level.VeryEasy, 3f },
             { Level.Easy, 2.1f },
             { Level.Normal, 1.8f },
             { Level.Hard, 1.5f },
@@ -63,7 +65,7 @@ public class DifficultyManager : MonoBehaviour
 
         minVert = new Dictionary<Level, int>()
         {
-            { Level.Very_Easy, 3 },
+            { Level.VeryEasy, 3 },
             { Level.Easy, 4 },
             { Level.Normal, 5 },
             { Level.Hard, 5 },
@@ -72,30 +74,24 @@ public class DifficultyManager : MonoBehaviour
 
         maxVert = new Dictionary<Level, int>()
         {
-            { Level.Very_Easy, 5 },
+            { Level.VeryEasy, 5 },
             { Level.Easy, 7 },
             { Level.Normal, 8 },
             { Level.Hard, 9 },
             { Level.Pro, 11 }
         };
-
-
     }
     
     void Start()
     {
-        GameManager.Instance.playerEnergySystem.maxEnergy = maxEnergies[(Level)currentLevel];
-        GameManager.Instance.playerEnergySystem.energyRegeneration = energyRegens[(Level)currentLevel];
-        GameManager.Instance.playerEnergySystem.energyRegenerationAccel = regenAccels[(Level)currentLevel];
-        asteroidGen.spawnRate = spawnTime[(Level)currentLevel];
-        asteroidGen.minimumVertices = minVert[(Level)currentLevel];
-        asteroidGen.maximumVertices = maxVert[(Level)currentLevel];
-        ScoreSystem.Instance.difficulty = ((int)currentLevel+1)*((int)currentLevel+1) - (int)currentLevel*2;
-    }
+        GameManager.Instance.playerEnergySystem.maxEnergy = maxEnergies[currentLevel];
+        GameManager.Instance.playerEnergySystem.energyRegeneration = energyRegens[currentLevel];
+        GameManager.Instance.playerEnergySystem.energyRegenerationAccel = regenAccels[currentLevel];
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        asteroidGen.spawnRate = spawnTime[currentLevel];
+        asteroidGen.minimumVertices = minVert[currentLevel];
+        asteroidGen.maximumVertices = maxVert[currentLevel];
+
+        ScoreSystem.Instance.difficulty = ((int)currentLevel + 1) * ((int)currentLevel + 1) - (int)currentLevel * 2;
     }
 }
