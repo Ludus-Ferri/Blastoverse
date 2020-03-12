@@ -22,6 +22,7 @@ public class ScoreSystem : MonoBehaviour
     [Header("Score Growth Properties")]
     public int scorePerSecond;
     public float scoreMultiplier;
+    public bool lockScore;
 
     [Header("UI Elements")]
     public TMP_Text scoreText;
@@ -34,15 +35,25 @@ public class ScoreSystem : MonoBehaviour
         if (Instance != this) Destroy(gameObject);
     }
 
+    public void SetScore(long val)
+    {
+        if (!lockScore)
+            score = val;
+    }
+
     public void IncreaseScore(long val)
     {
-        score += val * scoreMultiplier;
+        if (!lockScore)
+            score += val * scoreMultiplier;
     }
 
     public void DecreaseScore(long val)
     {
-        score -= val * scoreMultiplier;
-        if (score < 0) score = 0;
+        if (!lockScore)
+        {
+            score -= val * scoreMultiplier;
+            if (score < 0) score = 0;
+        }   
     }
 
     void UpdateScoreText()
@@ -73,7 +84,8 @@ public class ScoreSystem : MonoBehaviour
 
     private void Update()
     {
-        score += scorePerSecond * scoreMultiplier * Time.deltaTime;
+        if (!lockScore)
+            score += scorePerSecond * scoreMultiplier * Time.deltaTime;
 
         UpdateScoreText();
     }

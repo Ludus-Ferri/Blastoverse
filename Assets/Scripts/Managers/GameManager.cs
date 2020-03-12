@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        BeginGame();
         StartCoroutine(UnscaledUpdate());
     }
 
@@ -80,9 +81,17 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void BeginGame()
+    {
+        playerController.controlsEnabled = true;
+        ScoreSystem.Instance.lockScore = false;
+        ScoreSystem.Instance.SetScore(0);
+    }
+
     public void OnLoss()
     {
         playerController.controlsEnabled = false;
+        ScoreSystem.Instance.lockScore = true;
 
         StartCoroutine(PlayerExplodeCutscene());
 
