@@ -434,6 +434,7 @@ MonoBehaviour:
   scorePerSecond: 20
   scoreMultiplier: 1
   difficulty: 0
+  lockScore: 0
   scoreText: {fileID: 646080602}
   zeroColor: {r: 0.7607844, g: 0.7607844, b: 0.7607844, a: 0.18431373}
   zeroPadding: 8
@@ -522,12 +523,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493649660}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1241010255}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &632003468
 GameObject:
@@ -1140,6 +1141,7 @@ Transform:
   - {fileID: 1907683488}
   - {fileID: 632003469}
   - {fileID: 1856259339}
+  - {fileID: 493649662}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
