@@ -101,9 +101,8 @@ public class Asteroid : MonoBehaviour
                 parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
 
                 ScoreSystem.Instance.IncreaseScore((long)division);
-            }
 
-            
+            }
         }
     }
 }

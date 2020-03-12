@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float maxDoubleTapDuration;
     public float doubleTapVariance;
 
+    public bool controlsEnabled;
+
     [Header("Shooting Properties")]
     public ObjectPooler bulletPool;
     public float shootingCooldown;
@@ -89,8 +91,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DetectGestures();
-        GetInput();
+        if (controlsEnabled)
+        {
+            DetectGestures();
+            GetInput();
+        }
+        else
+        {
+            rotInput = 0;
+        }
 
         Move();
 
@@ -270,6 +279,7 @@ public class PlayerController : MonoBehaviour
         Debug.LogFormat("Collided with {0}", collision.gameObject.name);
         if (collision.gameObject.name == "Asteroid(Clone)")
         {
+            collision.attachedRigidbody.velocity *= 0.1f;
             GameManager.Instance.OnLoss();
         }
     }

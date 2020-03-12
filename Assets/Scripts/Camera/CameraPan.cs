@@ -17,7 +17,7 @@ public class CameraPan : CameraEffect
         oldRot = GameManager.Instance.playerController.transform.rotation;
     }
 
-    private void LateUpdate()
+    public override void Perform()
     {
         Quaternion rot = GameManager.Instance.playerController.transform.rotation;
 

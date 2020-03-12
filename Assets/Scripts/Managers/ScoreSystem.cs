@@ -24,6 +24,8 @@ public class ScoreSystem : MonoBehaviour
     public float scoreMultiplier;
     
     public int difficulty;
+    public bool lockScore;
+
 
     [Header("UI Elements")]
     public TMP_Text scoreText;
@@ -36,15 +38,26 @@ public class ScoreSystem : MonoBehaviour
         if (Instance != this) Destroy(gameObject);
     }
 
+    public void SetScore(long val)
+    {
+        if (!lockScore)
+            score = val;
+    }
+
     public void IncreaseScore(long val)
     {
-        score += val * scoreMultiplier*difficulty;
+        
+        if (!lockScore)
+            score += val * scoreMultiplier * difficulty;
     }
 
     public void DecreaseScore(long val)
     {
-        score -= val * scoreMultiplier;
-        if (score < 0) score = 0;
+        if (!lockScore)
+        {
+            score -= val * scoreMultiplier;
+            if (score < 0) score = 0;
+        }   
     }
 
     void UpdateScoreText()
@@ -75,7 +88,8 @@ public class ScoreSystem : MonoBehaviour
 
     private void Update()
     {
-        score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulty;
+        if (!lockScore)
+            score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulty;
 
         UpdateScoreText();
     }
