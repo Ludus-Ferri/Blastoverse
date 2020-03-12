@@ -23,7 +23,7 @@ public class ScoreSystem : MonoBehaviour
     public int scorePerSecond;
     public float scoreMultiplier;
     
-    public int difficulity;
+    public int difficulty;
 
     [Header("UI Elements")]
     public TMP_Text scoreText;
@@ -38,7 +38,7 @@ public class ScoreSystem : MonoBehaviour
 
     public void IncreaseScore(long val)
     {
-        score += val * scoreMultiplier;
+        score += val * scoreMultiplier*difficulty;
     }
 
     public void DecreaseScore(long val)
@@ -75,7 +75,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void Update()
     {
-        score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulity;
+        score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulty;
 
         UpdateScoreText();
     }

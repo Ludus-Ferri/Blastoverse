@@ -18,6 +18,7 @@ public class PlayerEnergySystem : MonoBehaviour
 
     private void Start()
     {
+        energy = maxEnergy;
         GameManager.Instance.playerController.OnShoot += PlayerController_OnShoot;
         regeneration = energyRegeneration;
     }
