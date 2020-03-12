@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         CameraShake shake = mainEffectManager.GetEffect<CameraShake>();
 
-        while (Time.unscaledTime - time < 1.67f)
+        while (Time.unscaledTime - time < 1.9f)
         {
             shake.InduceMotion(0.5f * Time.unscaledDeltaTime);
             yield return null;
