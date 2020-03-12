@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,14 +15,18 @@ public class GameManager : MonoBehaviour
     public PlayerController playerController;
     public PlayerEnergySystem playerEnergySystem;
 
+    public ObjectPooler asteroidPool;
+
     [Header("Level Properties")]
     public Color backgroundColor;
 
     [Header("Game Mechanics")]
     public float timeScaleSmoothing;
     public float targetTimeScale;
-
     public float targetZoom;
+
+    public float playerExplosionAsteroidRepelForce;
+
 
     [Header("Particles")]
     public GameObject playerExplosionParticle;
@@ -79,12 +84,12 @@ public class GameManager : MonoBehaviour
     {
         playerController.controlsEnabled = false;
 
-        StartCoroutine(PlayerExplodeCameraShake());
+        StartCoroutine(PlayerExplodeCutscene());
 
         anim.SetTrigger("DestructionPause");
     }
 
-    IEnumerator PlayerExplodeCameraShake()
+    IEnumerator PlayerExplodeCutscene()
     {
         float time = Time.unscaledTime;
 
@@ -98,6 +103,13 @@ public class GameManager : MonoBehaviour
 
         Instantiate(playerExplosionParticle, playerController.transform.position + Vector3.forward * -1, Quaternion.identity);
         playerController.gameObject.SetActive(false);
+
+        foreach (GameObject obj in asteroidPool.objects.Where(o => o.activeInHierarchy))
+        {
+            Vector3 distance = obj.transform.position - playerController.transform.position;
+
+            obj.GetComponent<Rigidbody2D>().AddForce(distance.normalized * playerExplosionAsteroidRepelForce / distance.magnitude);
+        }
 
         shake.InduceMotion(3f);
         yield return null;

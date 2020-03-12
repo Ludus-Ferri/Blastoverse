@@ -99,7 +99,7 @@ MonoBehaviour:
   initialMoveSpeed: 8
   initialMoveRotation: 18
   moveDeviationScale: 3.64
-  colliderSizeFactor: 1.1
+  colliderSizeFactor: 1
   parentGenerator: {fileID: 0}
 --- !u!50 &4176192138042248543
 Rigidbody2D:

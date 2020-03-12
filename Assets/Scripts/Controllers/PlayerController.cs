@@ -279,6 +279,7 @@ public class PlayerController : MonoBehaviour
         Debug.LogFormat("Collided with {0}", collision.gameObject.name);
         if (collision.gameObject.name == "Asteroid(Clone)")
         {
+            collision.attachedRigidbody.velocity *= 0.1f;
             GameManager.Instance.OnLoss();
         }
     }

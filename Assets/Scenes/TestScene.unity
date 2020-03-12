@@ -740,7 +740,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1373,9 +1373,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.0875, y: -0.100833334}
-      - {x: 0.26500002, y: -0.029166667}
-      - {x: 0.32500002, y: -0.0025}
-      - {x: 0.32500002, y: 0.0033333334}
+      - {x: 0.26263627, y: -0.025620952}
+      - {x: 0.31790882, y: -0.0013181269}
+      - {x: 0.31554493, y: 0.0021514297}
       - {x: 0.23416667, y: 0.040833335}
       - {x: 0.18166667, y: 0.06333333}
       - {x: 0.108333334, y: 0.09166667}
@@ -2035,10 +2035,12 @@ MonoBehaviour:
   mainEffectManager: {fileID: 1830795945}
   playerController: {fileID: 1402696457}
   playerEnergySystem: {fileID: 1402696458}
+  asteroidPool: {fileID: 130483700}
   backgroundColor: {r: 0.16862746, g: 0.3764706, b: 0.6039216, a: 1}
   timeScaleSmoothing: 2
   targetTimeScale: 1
   targetZoom: 5
+  playerExplosionAsteroidRepelForce: 50
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
 --- !u!95 &1988660420
