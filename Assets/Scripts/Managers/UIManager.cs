@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public EnergyBarController energyBarController;
+    public BlackCutoutController blackCutoutController;
 
     private void Awake()
     {
