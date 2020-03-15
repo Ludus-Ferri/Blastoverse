@@ -27,13 +27,15 @@ public class GameManager : MonoBehaviour
 
     public float playerExplosionAsteroidRepelForce;
 
-
     [Header("Particles")]
     public GameObject playerExplosionParticle;
 
     float defaultZoom;
 
     private Animator anim;
+
+    public delegate void OnGameReadyDelegate();
+    public event OnGameReadyDelegate OnGameReady;
 
     private void Awake()
     {
@@ -81,11 +83,33 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void BeginGame()
+    public void OnGameLoaded()
     {
-        playerController.controlsEnabled = true;
-        ScoreSystem.Instance.lockScore = false;
+        StartCoroutine(BeginGame());
+    }
+
+    IEnumerator BeginGame()
+    {
+        ScoreSystem.Instance.lockScore = true;
         ScoreSystem.Instance.SetScore(0);
+
+        UIManager.Instance.LocateHUDObjects();
+
+#if UNITY_EDITOR
+        yield return new WaitForSecondsRealtime(1f);
+#endif
+
+        UIManager.Instance.blackCutoutController.FadeToVisible();
+        playerController.controlsEnabled = true;
+
+        yield return new WaitForSecondsRealtime(0.9f);
+
+        UIManager.Instance.topHUDController.Show();
+
+        yield return new WaitForSecondsRealtime(0.2f);
+
+        ScoreSystem.Instance.lockScore = false;
+        OnGameReady?.Invoke();
     }
 
     public void OnLoss()

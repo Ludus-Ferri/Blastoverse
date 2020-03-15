@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Poolable
   - Asteroid
+  - Top HUD
+  - Energy Bar
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,14 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public EnergyBarController energyBarController;
+    public TopHUDController topHUDController;
     public BlackCutoutController blackCutoutController;
+
+    public void LocateHUDObjects()
+    {
+        energyBarController = GameObject.FindGameObjectWithTag("Energy Bar").GetComponent<EnergyBarController>();
+        topHUDController = GameObject.FindGameObjectWithTag("Top HUD").GetComponent<TopHUDController>();
+    }
 
     private void Awake()
     {

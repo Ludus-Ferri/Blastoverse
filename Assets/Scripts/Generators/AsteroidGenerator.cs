@@ -27,6 +27,18 @@ public class AsteroidGenerator : MonoBehaviour
     public float spawnRate;
     float currentRate;
 
+    public bool isEnabled;
+
+    private void Awake()
+    {
+        GameManager.Instance.OnGameReady += OnGameReady;
+    }
+
+    private void OnGameReady()
+    {
+        isEnabled = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,10 +60,13 @@ public class AsteroidGenerator : MonoBehaviour
 
     void Update()
     {
-        currentRate -= Time.deltaTime;
-        if (currentRate < 0)
+        if (isEnabled)
         {
-            GenerateNewAsteroid();
+            currentRate -= Time.deltaTime;
+            if (currentRate < 0)
+            {
+                GenerateNewAsteroid();
+            }
         }
     }
 
