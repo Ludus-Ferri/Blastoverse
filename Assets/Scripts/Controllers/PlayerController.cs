@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isShooting;
 
+    private bool isDead = false;
+
     #region Touch Input Events
 
     public delegate void OnDoubleTapDelegate();
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        isDead = false;
     }
 
     // Update is called once per frame
@@ -276,9 +278,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.LogFormat("Collided with {0}", collision.gameObject.name);
-        if (collision.gameObject.name == "Asteroid(Clone)")
+        if (collision.gameObject.name == "Asteroid(Clone)" && !isDead)
         {
+            isDead = true;
+
             collision.attachedRigidbody.velocity *= 0.1f;
             GameManager.Instance.OnLoss();
         }
