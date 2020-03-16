@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BlackCutoutController : MonoBehaviour
 {
+#pragma warning disable CS0649
     [SerializeField]
     private Animator anim;
+#pragma warning restore CS0649
 
     public void FadeToBlack()
     {
