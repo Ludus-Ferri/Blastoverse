@@ -1,3 +1,17 @@
 ui.playButton Play
 ui.optionsButton Options
 ui.quitButton Quit
+
+game.loss.1 You got shot.
+game.loss.2 Get rekt!
+game.loss.3 You lose.
+game.loss.4 Sniped to smithereens.
+game.loss.5 That barely touched the ship!
+game.loss.6 Collision imminent. Evacuate immediately.
+game.loss.7 It's just a small mark.
+game.loss.8 Kaboom!
+game.loss.9 If only we had thrusters on board...
+game.loss.10 You died.
+
+ui.loss.tryAgain Try Again
+ui.loss.giveUp Give Up

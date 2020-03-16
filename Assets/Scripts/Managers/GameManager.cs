@@ -117,6 +117,20 @@ public class GameManager : MonoBehaviour
         playerController.controlsEnabled = false;
         ScoreSystem.Instance.lockScore = true;
 
+        long highScore = HighScoreSystem.Instance.GetHighScore();
+
+        if (highScore == -1)
+        {
+            HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
+        }
+        else
+        {
+            if (ScoreSystem.Instance.Score > highScore)
+            {
+                HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
+            }
+        }
+
         StartCoroutine(PlayerExplodeCutscene());
 
         anim.SetTrigger("DestructionPause");

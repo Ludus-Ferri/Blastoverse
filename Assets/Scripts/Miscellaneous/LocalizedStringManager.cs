@@ -40,8 +40,9 @@ public class LocalizedStringManager
 
             foreach (string line in lines)
             {
-                string[] elements = line.Split(' ');
-                dictionary[CultureInfo.GetCultureInfo(asset.name)].Add(elements[0], elements[1]);
+                if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line)) continue;
+
+                dictionary[CultureInfo.GetCultureInfo(asset.name)].Add(line.Substring(0, line.IndexOf(' ')), line.Substring(line.IndexOf(' ') + 1));
             }
             
         }

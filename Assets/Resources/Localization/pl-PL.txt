@@ -1,3 +1,17 @@
 ui.playButton Graj
 ui.optionsButton Opcje
 ui.quitButton Wyjdź
+
+game.loss.1 Zostałeś zestrzelony.
+game.loss.2 Get rekt!
+game.loss.3 Przegrałeś.
+game.loss.4 Poleciały skrawki.
+game.loss.5 To nawet nie dotknęło statku!
+game.loss.6 Nastąpi zderzenie. Uciekaj natychmiast.
+game.loss.7 To tylko mała rysa.
+game.loss.8 Kaboom!
+game.loss.9 Gdybyśmy tylko mieli silniki...
+game.loss.10 Zginąłeś.
+
+ui.loss.tryAgain Spróbuj ponownie
+ui.loss.giveUp Poddaj się
