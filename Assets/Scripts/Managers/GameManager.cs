@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
     public float timeScaleSmoothing;
     public float targetTimeScale;
     public float targetZoom;
-
     public float playerExplosionAsteroidRepelForce;
+    public bool isHighScore;
 
     [Header("Particles")]
     public GameObject playerExplosionParticle;
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         yield return new WaitForSecondsRealtime(1f);
 #endif
-
+        UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
         UIManager.Instance.blackCutoutController.FadeToVisible();
         playerController.controlsEnabled = true;
 
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void OnLoss()
     {
+        isHighScore = false;
         playerController.controlsEnabled = false;
         ScoreSystem.Instance.lockScore = true;
 
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
         {
             if (ScoreSystem.Instance.Score > highScore)
             {
+                isHighScore = true;
                 HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
             }
         }
@@ -160,5 +162,15 @@ public class GameManager : MonoBehaviour
 
         shake.InduceMotion(3f);
         yield return null;
+        StartCoroutine(EndGame());
+
+    }
+
+    IEnumerator EndGame()
+    {
+        UIManager.Instance.topHUDController.Hide();
+        yield return new WaitForSecondsRealtime(1.7f);
+        UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
+        UIManager.Instance.highScoreModalController.Show();
     }
 }

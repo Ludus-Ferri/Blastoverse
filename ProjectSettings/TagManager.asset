@@ -8,6 +8,7 @@ TagManager:
   - Asteroid
   - Top HUD
   - Energy Bar
+  - High Score Modal
   layers:
   - Default
   - TransparentFX

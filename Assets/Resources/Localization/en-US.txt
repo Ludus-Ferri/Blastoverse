@@ -13,5 +13,7 @@ game.loss.8 Kaboom!
 game.loss.9 If only we had thrusters on board...
 game.loss.10 You died.
 
+ui.highScore New High Score!
+
 ui.loss.tryAgain Try Again
 ui.loss.giveUp Give Up

@@ -13,5 +13,7 @@ game.loss.8 Kaboom!
 game.loss.9 Gdybyśmy tylko mieli silniki...
 game.loss.10 Zginąłeś.
 
+ui.highScore Nowy rekord!
+
 ui.loss.tryAgain Spróbuj ponownie
 ui.loss.giveUp Poddaj się

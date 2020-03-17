@@ -9,11 +9,13 @@ public class UIManager : MonoBehaviour
     public EnergyBarController energyBarController;
     public TopHUDController topHUDController;
     public BlackCutoutController blackCutoutController;
+    public HighScoreModalController highScoreModalController;
 
     public void LocateHUDObjects()
     {
         energyBarController = GameObject.FindGameObjectWithTag("Energy Bar").GetComponent<EnergyBarController>();
         topHUDController = GameObject.FindGameObjectWithTag("Top HUD").GetComponent<TopHUDController>();
+        highScoreModalController = GameObject.FindGameObjectWithTag("High Score Modal").GetComponent<HighScoreModalController>();
     }
 
     private void Awake()

@@ -34,19 +34,28 @@ public class LocalizedStringManager
 
     public static void ParseTranslations()
     {
-        foreach (TextAsset asset in textAssets)
+        try
         {
-            string[] lines = asset.text.Split('\n');
-
-            foreach (string line in lines)
+            foreach (TextAsset asset in textAssets)
             {
-                if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line)) continue;
+                string[] lines = asset.text.Split('\n');
 
-                dictionary[CultureInfo.GetCultureInfo(asset.name)].Add(line.Substring(0, line.IndexOf(' ')), line.Substring(line.IndexOf(' ') + 1));
+                foreach (string line in lines)
+                {
+                    if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line)) continue;
+
+                    string key = line.Substring(0, line.IndexOf(' '));
+                    string value = line.Substring(line.IndexOf(' ') + 1);
+
+                    dictionary[CultureInfo.GetCultureInfo(asset.name)].Add(key, value);
+                }
             }
-            
+            Debug.Log("Loaded localization files successfully!");
         }
-        Debug.Log("Loaded localization files successfully!");
+        catch (Exception e)
+        {
+            Debug.LogError($"Something went wrong while loading localization files: {e.Message}");
+        }
     }
 
     public static void SetCulture(string culture)
