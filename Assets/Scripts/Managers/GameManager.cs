@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Particles")]
     public GameObject playerExplosionParticle;
+    public GameObject playerReviveParticle;
 
     float defaultZoom;
 
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         LocalizedStringManager.Init();
         LocalizedStringManager.ParseTranslations();
-        LocalizedStringManager.SetCulture("pl-PL");
+        LocalizedStringManager.SetCulture(CultureInfo.CurrentCulture.Name);
 
         targetTimeScale = 1;
     }
@@ -172,5 +174,45 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.7f);
         UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
         UIManager.Instance.highScoreModalController.Show();
+    }
+
+    public void OnRestart()
+    {
+        Debug.Log("Restarting!");
+        StartCoroutine(RestartGame());
+    }
+
+    IEnumerator RestartGame()
+    {
+        CameraShake shake = mainEffectManager.GetEffect<CameraShake>();
+
+        UIManager.Instance.highScoreModalController.Hide();
+        yield return new WaitForSecondsRealtime(0.5f);
+        UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
+
+        Instantiate(playerReviveParticle, playerController.transform.position, Quaternion.identity);
+
+        float time = Time.unscaledTime;
+
+        while (Time.unscaledTime - time < 1.6f)
+        {
+            shake.InduceMotion(0.7f * Time.unscaledDeltaTime);
+            yield return null;
+        }
+
+        playerController.gameObject.SetActive(true);
+        playerController.controlsEnabled = true;
+        playerController.isDead = false;
+
+        shake.InduceMotion(2f);
+
+        yield return new WaitForSecondsRealtime(0.6f);
+
+        UIManager.Instance.topHUDController.Show();
+
+        ScoreSystem.Instance.lockScore = false;
+        ScoreSystem.Instance.SetScore(0);
+
+        OnGameReady?.Invoke();
     }
 }

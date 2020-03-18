@@ -11,7 +11,7 @@ public class LocalizedStringManager
     public static Dictionary<CultureInfo, Dictionary<string, string>> dictionary;
 
     public static CultureInfo currentCulture;
-    public static string availableCultures;
+    public static List<string> availableCultures;
 
     private static TextAsset[] textAssets;
 
@@ -24,10 +24,13 @@ public class LocalizedStringManager
 
     public static void GetCultures()
     {
+        availableCultures = new List<string>();
+
         textAssets = Resources.LoadAll("Localization", typeof(TextAsset)).Cast<TextAsset>().ToArray();
 
         foreach (TextAsset asset in textAssets)
         {
+            availableCultures.Add(asset.name);
             dictionary.Add(CultureInfo.GetCultureInfo(asset.name), new Dictionary<string, string>());
         }
     }
@@ -60,7 +63,13 @@ public class LocalizedStringManager
 
     public static void SetCulture(string culture)
     {
-        currentCulture = CultureInfo.GetCultureInfo(culture);
+        if (availableCultures.Contains(culture))
+            currentCulture = CultureInfo.GetCultureInfo(culture);
+        else
+        {
+            Debug.LogWarning($"Localization for {culture} is not available, defaulting to en-US");
+            currentCulture = CultureInfo.GetCultureInfo("en-US");
+        }
     }
 
     public static string GetLocalizedString(string baseString)

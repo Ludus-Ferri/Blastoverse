@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
@@ -974,7 +974,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788260482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1047106295}
@@ -1048,7 +1048,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_ForceModuleActive: 1
 --- !u!114 &1005797142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,6 +1926,7 @@ MonoBehaviour:
   cameraShake: {fileID: 1830795944}
   momentOfInertia: 9
   rotSpeedCap: 600
+  isDead: 0
 --- !u!114 &1402696458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2153,7 +2154,6 @@ GameObject:
   - component: {fileID: 1515942417}
   - component: {fileID: 1515942416}
   - component: {fileID: 1515942415}
-  - component: {fileID: 1515942414}
   - component: {fileID: 1515942418}
   m_Layer: 5
   m_Name: Persistent Canvas
@@ -2162,23 +2162,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1515942414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515942413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1515942415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3397,7 +3380,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931604876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2023287557}
@@ -3451,7 +3434,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1931604879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1988660419}
+        m_MethodName: OnRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1931604879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3471,7 +3465,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3546,6 +3540,8 @@ MonoBehaviour:
   playerExplosionAsteroidRepelForce: 50
   isHighScore: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
+    type: 3}
+  playerReviveParticle: {fileID: 412925607502107111, guid: b22a3f7d72500fa4b9a2f1d7fc77c9dd,
     type: 3}
 --- !u!95 &1988660420
 Animator:

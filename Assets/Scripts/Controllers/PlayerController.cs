@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isShooting;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     #region Touch Input Events
 
