@@ -383,6 +383,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &143645915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143645916}
+  - component: {fileID: 143645917}
+  m_Layer: 0
+  m_Name: Layered BGM Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &143645916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143645915}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1241010255}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143645917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143645915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f8b21851e4d1d47b0c0de3535d7df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBGM: {fileID: 0}
+  mixer: {fileID: 8994895151300460462, guid: d9a957ed79ec4b84ba47d37930f6d5b1, type: 2}
+  intensity: 0
 --- !u!1 &145054058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1691,55 @@ MonoBehaviour:
   splitRotation: 30
   spawnRate: 1.31
   isEnabled: 0
+--- !u!1 &1151629733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151629734}
+  - component: {fileID: 1151629735}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1151629734
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151629733}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1241010255}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151629735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151629733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc6c089ca4585e4b9e0378b0f0386f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 24300002, guid: d9a957ed79ec4b84ba47d37930f6d5b1, type: 2}
+  music: {fileID: 8994895151300460462, guid: d9a957ed79ec4b84ba47d37930f6d5b1, type: 2}
+  sfx: {fileID: 5662200864040780976, guid: d9a957ed79ec4b84ba47d37930f6d5b1, type: 2}
+  ui: {fileID: 3511047909448510383, guid: d9a957ed79ec4b84ba47d37930f6d5b1, type: 2}
+  soundObjectPrefab: {fileID: 3977034289304321891, guid: 613792e202ae208428d2ee82e073bf3e,
+    type: 3}
 --- !u!1 &1241010253
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1787,8 @@ Transform:
   - {fileID: 632003469}
   - {fileID: 1856259339}
   - {fileID: 493649662}
+  - {fileID: 1151629734}
+  - {fileID: 143645916}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3539,10 +3636,13 @@ MonoBehaviour:
   targetZoom: 5
   playerExplosionAsteroidRepelForce: 50
   isHighScore: 0
+  musicIntensity: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
   playerReviveParticle: {fileID: 412925607502107111, guid: b22a3f7d72500fa4b9a2f1d7fc77c9dd,
     type: 3}
+  gameMusic: {fileID: 11400000, guid: 4e4364cb907a34644ac101696da8a663, type: 2}
+  menuMusic: {fileID: 0}
 --- !u!95 &1988660420
 Animator:
   serializedVersion: 3

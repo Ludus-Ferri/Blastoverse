@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
     public GameObject playerExplosionParticle;
     public GameObject playerReviveParticle;
 
+    [Header("Music")]
+    public LayeredBGM gameMusic;
+    public LayeredBGM menuMusic;
+
+    [Range(0, 1)]
+    public float musicIntensity;
+
     float defaultZoom;
 
     private Animator anim;
@@ -71,6 +78,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         mainCamera.backgroundColor = backgroundColor;
+        LayeredBGMPlayer.Instance.intensity = musicIntensity;
     }
 
     IEnumerator UnscaledUpdate()
@@ -88,6 +96,7 @@ public class GameManager : MonoBehaviour
     public void OnGameLoaded()
     {
         StartCoroutine(BeginGame());
+        PlayGameMusic();
     }
 
     IEnumerator BeginGame()
@@ -112,6 +121,12 @@ public class GameManager : MonoBehaviour
 
         ScoreSystem.Instance.lockScore = false;
         OnGameReady?.Invoke();
+    }
+
+    void PlayGameMusic()
+    {
+        LayeredBGMPlayer.Instance.currentBGM = gameMusic;
+        LayeredBGMPlayer.Instance.Play();
     }
 
     public void OnLoss()
@@ -191,6 +206,10 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
 
         Instantiate(playerReviveParticle, playerController.transform.position, Quaternion.identity);
+
+        playerController.gameObject.SetActive(true);
+        playerController.transform.rotation = Quaternion.Euler(0, 0, 90);
+        playerController.gameObject.SetActive(false);
 
         float time = Time.unscaledTime;
 
