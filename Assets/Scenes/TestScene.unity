@@ -3636,13 +3636,23 @@ MonoBehaviour:
   targetZoom: 5
   playerExplosionAsteroidRepelForce: 50
   isHighScore: 0
-  musicIntensity: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
   playerReviveParticle: {fileID: 412925607502107111, guid: b22a3f7d72500fa4b9a2f1d7fc77c9dd,
     type: 3}
   gameMusic: {fileID: 11400000, guid: 4e4364cb907a34644ac101696da8a663, type: 2}
   menuMusic: {fileID: 0}
+  musicLossLowpass: 300
+  musicLowpassSmoothing: 0.4
+  musicLossVolume: -20
+  musicVolumeSmoothing: 0.4
+  exponentialRolloff:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  musicIntensity: 0
 --- !u!95 &1988660420
 Animator:
   serializedVersion: 3

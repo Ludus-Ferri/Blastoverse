@@ -36,10 +36,17 @@ public class GameManager : MonoBehaviour
     public LayeredBGM gameMusic;
     public LayeredBGM menuMusic;
 
+    public float musicLossLowpass;
+    public float musicLowpassSmoothing;
+
+    public float musicLossVolume;
+    public float musicVolumeSmoothing;
+
     [Range(0, 1)]
     public float musicIntensity;
 
     float defaultZoom;
+    float targetMusicCutoff, targetMusicVolume;
 
     private Animator anim;
 
@@ -78,7 +85,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         mainCamera.backgroundColor = backgroundColor;
+    }
+
+    void UpdateAudio()
+    {
         LayeredBGMPlayer.Instance.intensity = musicIntensity;
+
+        AudioManager.Instance.music.audioMixer.GetFloat("MusicLowpass", out float cutoff);
+        AudioManager.Instance.music.audioMixer.SetFloat("MusicLowpass", MathHelper.Logerp(cutoff, targetMusicCutoff, Time.unscaledDeltaTime / musicLowpassSmoothing));
+
+        AudioManager.Instance.music.audioMixer.GetFloat("MusicVolume", out float volume);
+        volume += 100;
+        AudioManager.Instance.music.audioMixer.SetFloat("MusicVolume", MathHelper.Logerp(volume, targetMusicVolume + 100, Time.unscaledDeltaTime / musicVolumeSmoothing) - 100);
     }
 
     IEnumerator UnscaledUpdate()
@@ -87,6 +105,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = targetTimeScale;
             mainCamera.orthographicSize = targetZoom;
+            UpdateAudio();
 
             yield return null;
         }
@@ -101,6 +120,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginGame()
     {
+        targetMusicCutoff = 22000;
+        targetMusicVolume = 0;
+
         ScoreSystem.Instance.lockScore = true;
         ScoreSystem.Instance.SetScore(0);
 
@@ -134,6 +156,8 @@ public class GameManager : MonoBehaviour
         isHighScore = false;
         playerController.controlsEnabled = false;
         ScoreSystem.Instance.lockScore = true;
+
+        targetMusicCutoff = musicLossLowpass;
 
         long highScore = HighScoreSystem.Instance.GetHighScore();
 
@@ -187,6 +211,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.topHUDController.Hide();
         yield return new WaitForSecondsRealtime(1.7f);
+        targetMusicVolume = musicLossVolume;
         UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
         UIManager.Instance.highScoreModalController.Show();
     }
@@ -218,6 +243,9 @@ public class GameManager : MonoBehaviour
             shake.InduceMotion(0.7f * Time.unscaledDeltaTime);
             yield return null;
         }
+
+        targetMusicCutoff = 22000;
+        targetMusicVolume = 0;
 
         playerController.gameObject.SetActive(true);
         playerController.controlsEnabled = true;
