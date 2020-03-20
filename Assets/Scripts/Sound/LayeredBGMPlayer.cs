@@ -83,10 +83,4 @@ public class LayeredBGMPlayer : MonoBehaviour
             source.Stop();
         }
     }
-
-    private void Start()
-    {
-        LoadBGM();
-        Play();
-    }
 }

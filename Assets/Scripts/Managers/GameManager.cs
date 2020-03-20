@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public GameState gameState;
 
     public int screenWidth, screenHeight;
 
@@ -77,7 +80,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BeginGame();
         StartCoroutine(UnscaledUpdate());
     }
 
@@ -85,6 +87,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         mainCamera.backgroundColor = backgroundColor;
+
+        if (gameState == GameState.MainMenu)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("TestScene");
+            }
+        }
     }
 
     void UpdateAudio()
@@ -114,8 +124,28 @@ public class GameManager : MonoBehaviour
 
     public void OnGameLoaded()
     {
+        gameState = GameState.InGame; 
+        FindGameObjects();
+
+        UIManager.Instance.LocateHUDObjects();
+        DifficultyManager.Instance.Init();
+        ScoreSystem.Instance.Init();
+        DifficultyManager.Instance.Setup();
+
+        LayeredBGMPlayer.Instance.Stop();
+        LayeredBGMPlayer.Instance.UnloadBGM();
+
         StartCoroutine(BeginGame());
         PlayGameMusic();
+    }
+
+    public void OnMenuLoaded()
+    {
+        LayeredBGMPlayer.Instance.Stop();
+        LayeredBGMPlayer.Instance.UnloadBGM();
+
+        StartCoroutine(BeginMenu());
+        PlayMenuMusic();
     }
 
     IEnumerator BeginGame()
@@ -125,8 +155,6 @@ public class GameManager : MonoBehaviour
 
         ScoreSystem.Instance.lockScore = true;
         ScoreSystem.Instance.SetScore(0);
-
-        UIManager.Instance.LocateHUDObjects();
 
 #if UNITY_EDITOR
         yield return new WaitForSecondsRealtime(1f);
@@ -145,10 +173,38 @@ public class GameManager : MonoBehaviour
         OnGameReady?.Invoke();
     }
 
+    IEnumerator BeginMenu()
+    {
+        targetMusicCutoff = 22000;
+        targetMusicVolume = 0;
+        //UIManager.Instance.LocateMenuObjects();
+        yield return null;
+    }
+
     void PlayGameMusic()
     {
         LayeredBGMPlayer.Instance.currentBGM = gameMusic;
+        LayeredBGMPlayer.Instance.LoadBGM();
         LayeredBGMPlayer.Instance.Play();
+    }
+
+    void PlayMenuMusic()
+    {
+        LayeredBGMPlayer.Instance.currentBGM = menuMusic;
+        LayeredBGMPlayer.Instance.LoadBGM();
+        LayeredBGMPlayer.Instance.Play();
+    }
+
+    void FindGameObjects()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+        playerEnergySystem = player.GetComponent<PlayerEnergySystem>();
+
+        mainCamera = Camera.main;
+        mainEffectManager = mainCamera.GetComponent<CameraEffectManager>();
+
+        asteroidPool = GameObject.FindGameObjectWithTag("Asteroid Pool").GetComponent<ObjectPooler>();
     }
 
     public void OnLoss()

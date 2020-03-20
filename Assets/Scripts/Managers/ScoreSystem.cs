@@ -26,7 +26,6 @@ public class ScoreSystem : MonoBehaviour
     public int difficulty;
     public bool lockScore;
 
-
     [Header("UI Elements")]
     public TMP_Text scoreText;
     public Color zeroColor;
@@ -38,6 +37,11 @@ public class ScoreSystem : MonoBehaviour
         if (Instance != this) Destroy(gameObject);
     }
 
+    public void Init()
+    {
+        scoreText = GameObject.FindGameObjectWithTag("Score Text").GetComponent<TMP_Text>();
+    }
+
     public void SetScore(long val)
     {
         if (!lockScore)
@@ -46,7 +50,6 @@ public class ScoreSystem : MonoBehaviour
 
     public void IncreaseScore(long val)
     {
-        
         if (!lockScore)
             score += val * scoreMultiplier * difficulty;
     }
@@ -88,9 +91,13 @@ public class ScoreSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!lockScore)
-            score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulty;
+        if (GameManager.Instance.gameState == GameState.InGame)
+        {
+            if (!lockScore)
+                score += scorePerSecond * scoreMultiplier * Time.deltaTime * difficulty;
 
-        UpdateScoreText();
+            UpdateScoreText();
+        }
+        
     }
 }

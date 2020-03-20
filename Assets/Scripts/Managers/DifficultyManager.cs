@@ -7,19 +7,19 @@ public class DifficultyManager : MonoBehaviour
     public static DifficultyManager Instance;
     public AsteroidGenerator asteroidGen;
 
-    public enum Level
+    public enum Difficulty
     {
         VeryEasy, Easy, Normal, Hard, Pro
     }
 
-    Dictionary<Level, int> maxEnergies;
-    Dictionary<Level, int> energyRegens;
-    Dictionary<Level, int> regenAccels;
-    Dictionary<Level, float> spawnTime;
-    Dictionary<Level, int> minVert;
-    Dictionary<Level, int> maxVert;
+    Dictionary<Difficulty, int> maxEnergies;
+    Dictionary<Difficulty, int> energyRegens;
+    Dictionary<Difficulty, int> regenAccels;
+    Dictionary<Difficulty, float> spawnTime;
+    Dictionary<Difficulty, int> minVert;
+    Dictionary<Difficulty, int> maxVert;
 
-    public Level currentLevel;
+    public Difficulty currentDifficulty;
     
     // Start is called before the first frame update
     void Awake()
@@ -27,71 +27,82 @@ public class DifficultyManager : MonoBehaviour
         if (Instance == null) Instance = this;
         if (Instance != this) Destroy(gameObject);
 
-        maxEnergies = new Dictionary<Level, int>()
+        maxEnergies = new Dictionary<Difficulty, int>()
         {
-            { Level.VeryEasy, 1900 },
-            { Level.Easy, 1500 },
-            { Level.Normal, 1200 },
-            { Level.Hard, 900 },
-            { Level.Pro, 600 }
+            { Difficulty.VeryEasy, 1900 },
+            { Difficulty.Easy, 1500 },
+            { Difficulty.Normal, 1200 },
+            { Difficulty.Hard, 900 },
+            { Difficulty.Pro, 600 }
         };
 
-        energyRegens = new Dictionary<Level, int>()
+        energyRegens = new Dictionary<Difficulty, int>()
         {
-            { Level.VeryEasy, 50 },
-            { Level.Easy, 40 },
-            { Level.Normal, 30 },
-            { Level.Hard, 25 },
-            { Level.Pro, 20 }
+            { Difficulty.VeryEasy, 50 },
+            { Difficulty.Easy, 40 },
+            { Difficulty.Normal, 30 },
+            { Difficulty.Hard, 25 },
+            { Difficulty.Pro, 20 }
         };
 
-        regenAccels = new Dictionary<Level, int>()
+        regenAccels = new Dictionary<Difficulty, int>()
         {
-            { Level.VeryEasy, 15 },
-            { Level.Easy, 12 },
-            { Level.Normal, 10 },
-            { Level.Hard, 9 },
-            { Level.Pro, 7 }
+            { Difficulty.VeryEasy, 15 },
+            { Difficulty.Easy, 12 },
+            { Difficulty.Normal, 10 },
+            { Difficulty.Hard, 9 },
+            { Difficulty.Pro, 7 }
         };
 
-        spawnTime = new Dictionary<Level, float>()
+        spawnTime = new Dictionary<Difficulty, float>()
         {
-            { Level.VeryEasy, 3f },
-            { Level.Easy, 2.1f },
-            { Level.Normal, 1.8f },
-            { Level.Hard, 1.5f },
-            { Level.Pro, 1f }
+            { Difficulty.VeryEasy, 3f },
+            { Difficulty.Easy, 2.1f },
+            { Difficulty.Normal, 1.8f },
+            { Difficulty.Hard, 1.5f },
+            { Difficulty.Pro, 1f }
         };
 
-        minVert = new Dictionary<Level, int>()
+        minVert = new Dictionary<Difficulty, int>()
         {
-            { Level.VeryEasy, 3 },
-            { Level.Easy, 4 },
-            { Level.Normal, 5 },
-            { Level.Hard, 5 },
-            { Level.Pro, 6 }
+            { Difficulty.VeryEasy, 3 },
+            { Difficulty.Easy, 4 },
+            { Difficulty.Normal, 5 },
+            { Difficulty.Hard, 5 },
+            { Difficulty.Pro, 6 }
         };
 
-        maxVert = new Dictionary<Level, int>()
+        maxVert = new Dictionary<Difficulty, int>()
         {
-            { Level.VeryEasy, 5 },
-            { Level.Easy, 7 },
-            { Level.Normal, 8 },
-            { Level.Hard, 9 },
-            { Level.Pro, 11 }
+            { Difficulty.VeryEasy, 5 },
+            { Difficulty.Easy, 7 },
+            { Difficulty.Normal, 8 },
+            { Difficulty.Hard, 9 },
+            { Difficulty.Pro, 11 }
         };
     }
     
     void Start()
     {
-        GameManager.Instance.playerEnergySystem.maxEnergy = maxEnergies[currentLevel];
-        GameManager.Instance.playerEnergySystem.energyRegeneration = energyRegens[currentLevel];
-        GameManager.Instance.playerEnergySystem.energyRegenerationAccel = regenAccels[currentLevel];
+        if (GameManager.Instance.gameState == GameState.InGame)
+            Setup();
+    }
 
-        asteroidGen.spawnRate = spawnTime[currentLevel];
-        asteroidGen.minimumVertices = minVert[currentLevel];
-        asteroidGen.maximumVertices = maxVert[currentLevel];
+    public void Init()
+    {
+        asteroidGen = GameObject.FindGameObjectWithTag("Asteroid Generator").GetComponent<AsteroidGenerator>();
+    }
 
-        ScoreSystem.Instance.difficulty = ((int)currentLevel + 1) * ((int)currentLevel + 1) - (int)currentLevel * 2;
+    public void Setup()
+    {
+        GameManager.Instance.playerEnergySystem.maxEnergy = maxEnergies[currentDifficulty];
+        GameManager.Instance.playerEnergySystem.energyRegeneration = energyRegens[currentDifficulty];
+        GameManager.Instance.playerEnergySystem.energyRegenerationAccel = regenAccels[currentDifficulty];
+
+        asteroidGen.spawnRate = spawnTime[currentDifficulty];
+        asteroidGen.minimumVertices = minVert[currentDifficulty];
+        asteroidGen.maximumVertices = maxVert[currentDifficulty];
+
+        ScoreSystem.Instance.difficulty = ((int)currentDifficulty + 1) * ((int)currentDifficulty + 1) - (int)currentDifficulty * 2;
     }
 }

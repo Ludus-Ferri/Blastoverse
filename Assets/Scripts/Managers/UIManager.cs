@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        energyBarController.value = GameManager.Instance.playerEnergySystem.energy / GameManager.Instance.playerEnergySystem.maxEnergy;
+        if (GameManager.Instance.gameState == GameState.InGame)
+            energyBarController.value = GameManager.Instance.playerEnergySystem.energy / GameManager.Instance.playerEnergySystem.maxEnergy;
     }
 }

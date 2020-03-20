@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class Wakeup : MonoBehaviour
 {
+    public GameState gameState;
+
     private void Awake()
     {
-        GameManager.Instance.OnGameLoaded();
+        switch (gameState)
+        {
+            case GameState.InGame:
+                GameManager.Instance.OnGameLoaded();
+                break;
+            case GameState.MainMenu:
+                GameManager.Instance.OnMenuLoaded();
+                break;
+            default: break;
+
+        }
     }
 }

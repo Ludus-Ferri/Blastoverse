@@ -9,6 +9,12 @@ TagManager:
   - Top HUD
   - Energy Bar
   - High Score Modal
+  - Bullet Pool
+  - Asteroid Pool
+  - BG Asteroid Pool
+  - Score Text
+  - Black Cutout
+  - Asteroid Generator
   layers:
   - Default
   - TransparentFX
