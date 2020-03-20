@@ -181,6 +181,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerExplodeCutscene()
     {
+        AudioManager.Instance.PlaySoundAtPosition(AudioManager.Instance.GetSound("Player Explosion"), playerController.transform.position);
+
         float time = Time.unscaledTime;
 
         CameraShake shake = mainEffectManager.GetEffect<CameraShake>();

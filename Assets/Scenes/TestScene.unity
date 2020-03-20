@@ -3645,13 +3645,7 @@ MonoBehaviour:
   musicLossLowpass: 300
   musicLowpassSmoothing: 0.4
   musicLossVolume: -20
-  musicVolumeSmoothing: 0.4
-  exponentialRolloff:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  musicVolumeSmoothing: 1
   musicIntensity: 0
 --- !u!95 &1988660420
 Animator:
