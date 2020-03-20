@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 821644f9bb8e1654ebfd4c5cf497b8bf, type: 3}
-  m_Name: Player Explosion
+  m_Name: Asteroid Split Filtered
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 1532efaa5d7e88a4c90e195686dc1bb7, type: 3}
+  clip: {fileID: 8300000, guid: 1b26e1a450aef0b4a90b3628cb569691, type: 3}
   volume: 1
   pitch: 1
   type: 2

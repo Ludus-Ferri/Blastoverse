@@ -14,10 +14,12 @@ public class Asteroid : MonoBehaviour
 
     public float colliderSizeFactor;
 
-    [Header("Destroy points")]
-    public float division;
-    public float destruction;
+    [Header("Points")]
+    public float divisionPoints;
+    public float destructionPoints;
 
+    [Header("Sound Effects")]
+    public Sound destructionSFX;
 
     Rigidbody2D rb2D;
 
@@ -85,7 +87,8 @@ public class Asteroid : MonoBehaviour
             if (area < parentGenerator.areaThreshold)
             {
                 gameObject.SetActive(false);
-                ScoreSystem.Instance.IncreaseScore((long)destruction);
+                ScoreSystem.Instance.IncreaseScore((long)destructionPoints);
+                AudioManager.Instance.PlaySoundAtPosition(destructionSFX, transform.position);
             }
             else
             {
@@ -100,7 +103,7 @@ public class Asteroid : MonoBehaviour
 
                 parentGenerator.GenerateAsteroidSlices(slices[0], slices[1], negCentroid, posCentroid, rb2D.velocity, vel);
 
-                ScoreSystem.Instance.IncreaseScore((long)division);
+                ScoreSystem.Instance.IncreaseScore((long)divisionPoints);
 
             }
         }

@@ -100,8 +100,10 @@ MonoBehaviour:
   initialMoveRotation: 18
   moveDeviationScale: 2.24
   colliderSizeFactor: 1.1
-  division: 1
-  destruction: 8
+  divisionPoints: 0
+  destructionPoints: 0
+  splitSFX: {fileID: 11400000, guid: d4ab6b8d22c225a42a13328e03ebb4ea, type: 2}
+  destructionSFX: {fileID: 11400000, guid: 87535dd724ac65c4c82fb6d8dd31358c, type: 2}
   parentGenerator: {fileID: 0}
 --- !u!50 &4176192138042248543
 Rigidbody2D:

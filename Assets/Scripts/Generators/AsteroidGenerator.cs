@@ -27,6 +27,11 @@ public class AsteroidGenerator : MonoBehaviour
     public float spawnRate;
     float currentRate;
 
+    [Header("Sound Effects")]
+    public Sound splitSFX;
+    public Sound filteredSplitSFX;
+    public Sound destructionSFX;
+
     public bool isEnabled;
 
     private void Awake()
@@ -93,6 +98,8 @@ public class AsteroidGenerator : MonoBehaviour
         Vector3 preVelLeft = Quaternion.Euler(0, 0, 90) * slicerVelocity * splitForce;
         Vector3 preVelRight = Quaternion.Euler(0, 0, -90) * slicerVelocity * splitForce;
 
+        bool spawnedLeft = false, spawnedRight = false;
+
         if (leftData.GetArea() > areaThreshold)
         {
             leftAsteroid = asteroidPool.ActivateObject().GetComponent<Asteroid>();
@@ -101,6 +108,7 @@ public class AsteroidGenerator : MonoBehaviour
             leftAsteroid.transform.position = leftCentroid;
             leftAsteroid.transform.rotation = Quaternion.identity;
             leftAsteroid.Move((preVelocity + slicerVelocity + preVelLeft) * momentumFactor, AsteroidGenerationRNG.Instance.NextFloat(-1, 1) * splitRotation);
+            spawnedLeft = true;
         }
 
         if (rightData.GetArea() > areaThreshold)
@@ -111,9 +119,15 @@ public class AsteroidGenerator : MonoBehaviour
             rightAsteroid.transform.position = rightCentroid;
             rightAsteroid.transform.rotation = Quaternion.identity;
             rightAsteroid.Move((preVelocity + slicerVelocity + preVelRight) * momentumFactor, AsteroidGenerationRNG.Instance.NextFloat(-1, 1) * splitRotation);
+            spawnedRight = true;
         }
 
-        
+        if (spawnedLeft && spawnedRight)
+            AudioManager.Instance.PlaySoundAtPosition(splitSFX, transform.position);
+        else if (spawnedLeft || spawnedRight)
+            AudioManager.Instance.PlaySoundAtPosition(filteredSplitSFX, transform.position);
+        else
+            AudioManager.Instance.PlaySoundAtPosition(destructionSFX, transform.position);
 
     }
 

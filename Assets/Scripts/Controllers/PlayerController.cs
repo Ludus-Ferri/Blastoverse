@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
     public bool isDead = false;
 
+    [Header("Sound Effects")]
+    public Sound shootSFX;
+
     #region Touch Input Events
 
     public delegate void OnDoubleTapDelegate();
@@ -271,6 +274,8 @@ public class PlayerController : MonoBehaviour
                 bullet.transform.position = transform.position + new Vector3(bulletOffset.x * Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), bulletOffset.y * Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad));
                 bulletMovement.angle = transform.rotation.eulerAngles.z;
                 bulletMovement.Move();
+
+                AudioManager.Instance.PlaySoundAtPosition(shootSFX, bullet.transform.position);
             }
 
         }
