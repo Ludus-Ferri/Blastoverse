@@ -21,7 +21,11 @@ public class AudioManager : MonoBehaviour
     {
         #region Singleton
         if (Instance == null) Instance = this;
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         #endregion
 
         sounds = new Dictionary<string, Sound>();

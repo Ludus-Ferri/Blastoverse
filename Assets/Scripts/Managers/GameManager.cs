@@ -59,7 +59,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         anim = GetComponent<Animator>();
 

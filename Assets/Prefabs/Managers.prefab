@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidGen: {fileID: 0}
-  currentLevel: 4
+  currentDifficulty: 4
 --- !u!1 &5238916507952256518
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3a462ad0948374db916ea3b6a4fa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 0
+  gameState: 1
   screenWidth: 0
   screenHeight: 0
   mainCamera: {fileID: 0}

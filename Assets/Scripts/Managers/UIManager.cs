@@ -20,8 +20,14 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        #region Singleton
         if (Instance == null) Instance = this;
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        #endregion
     }
 
     // Update is called once per frame

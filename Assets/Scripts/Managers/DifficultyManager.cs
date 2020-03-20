@@ -24,8 +24,14 @@ public class DifficultyManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        #region Singleton
         if (Instance == null) Instance = this;
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        #endregion
 
         maxEnergies = new Dictionary<Difficulty, int>()
         {

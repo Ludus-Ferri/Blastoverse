@@ -11,8 +11,14 @@ public class MeshStorage : MonoBehaviour
 
     private void Awake()
     {
+        #region Singleton
         if (Instance == null) Instance = this;
-        if (Instance != this) Destroy(gameObject);
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        #endregion
 
         asteroidMeshes = new Dictionary<int, Mesh>();
         bgAsteroidMeshes = new Dictionary<int, Mesh>();

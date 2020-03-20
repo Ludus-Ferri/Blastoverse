@@ -3072,11 +3072,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5238916507660988760, guid: b7a22bd9fe679aa46a579e1dac03a85a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 5238916507660988762, guid: b7a22bd9fe679aa46a579e1dac03a85a,
         type: 3}
       propertyPath: scoreText
@@ -3087,11 +3082,6 @@ PrefabInstance:
       propertyPath: asteroidGen
       value: 
       objectReference: {fileID: 1122652410}
-    - target: {fileID: 5238916507769975840, guid: b7a22bd9fe679aa46a579e1dac03a85a,
-        type: 3}
-      propertyPath: currentDifficulty
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 5238916509037435536, guid: b7a22bd9fe679aa46a579e1dac03a85a,
         type: 3}
       propertyPath: m_Name
@@ -3177,11 +3167,6 @@ PrefabInstance:
       propertyPath: asteroidPool
       value: 
       objectReference: {fileID: 130483700}
-    - target: {fileID: 5238916509260826142, guid: b7a22bd9fe679aa46a579e1dac03a85a,
-        type: 3}
-      propertyPath: gameState
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5238916509661073361, guid: b7a22bd9fe679aa46a579e1dac03a85a,
         type: 3}
       propertyPath: energyBarController
