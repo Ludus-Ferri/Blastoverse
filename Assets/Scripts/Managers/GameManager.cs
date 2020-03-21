@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public float musicIntensity;
 
     float defaultZoom;
-    float targetMusicCutoff, targetMusicVolume;
+    public float targetMusicCutoff, targetMusicVolume;
 
     private Animator anim;
 
@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(UnscaledUpdate());
+        StartCoroutine(AudioUpdate());
     }
 
     // Update is called once per frame
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene("TestScene");
+                OnMenuEnd();
             }
         }
     }
@@ -119,11 +120,19 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = targetTimeScale;
             mainCamera.orthographicSize = targetZoom;
-            UpdateAudio();
 
             yield return null;
         }
         
+    }
+
+    IEnumerator AudioUpdate()
+    {
+        while (true)
+        {
+            UpdateAudio();
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
     }
 
     public void OnGameLoaded()
@@ -152,6 +161,11 @@ public class GameManager : MonoBehaviour
         PlayMenuMusic();
     }
 
+    public void OnMenuEnd()
+    {
+        StartCoroutine(EndMenu());
+    }
+
     IEnumerator BeginGame()
     {
         targetMusicCutoff = 22000;
@@ -160,9 +174,6 @@ public class GameManager : MonoBehaviour
         ScoreSystem.Instance.lockScore = true;
         ScoreSystem.Instance.SetScore(0);
 
-#if UNITY_EDITOR
-        yield return new WaitForSecondsRealtime(1f);
-#endif
         UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
         UIManager.Instance.blackCutoutController.FadeToVisible();
         playerController.controlsEnabled = true;
@@ -181,8 +192,22 @@ public class GameManager : MonoBehaviour
     {
         targetMusicCutoff = 22000;
         targetMusicVolume = 0;
-        //UIManager.Instance.LocateMenuObjects();
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        UIManager.Instance.blackCutoutController.FadeToVisible();
+
         yield return null;
+    }
+
+    IEnumerator EndMenu()
+    {
+        targetMusicVolume = -80;
+
+        UIManager.Instance.blackCutoutController.FadeToBlack();
+        yield return new WaitForSecondsRealtime(0.7f);
+
+        SceneManager.LoadScene("Game");
     }
 
     void PlayGameMusic()
