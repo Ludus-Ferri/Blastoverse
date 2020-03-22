@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         screenWidth = Screen.width;
         screenHeight = Screen.height;
 
-        //mainCamera = Camera.main;
+        mainCamera = Camera.main;
 
         LocalizedStringManager.Init();
         LocalizedStringManager.ParseTranslations();
@@ -154,6 +154,8 @@ public class GameManager : MonoBehaviour
 
     public void OnMenuLoaded()
     {
+        gameState = GameState.MainMenu;
+
         LayeredBGMPlayer.Instance.Stop();
         LayeredBGMPlayer.Instance.UnloadBGM();
 
@@ -171,8 +173,9 @@ public class GameManager : MonoBehaviour
         targetMusicCutoff = 22000;
         targetMusicVolume = 0;
 
-        ScoreSystem.Instance.lockScore = true;
+        ScoreSystem.Instance.lockScore = false;
         ScoreSystem.Instance.SetScore(0);
+        ScoreSystem.Instance.lockScore = true;
 
         UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
         UIManager.Instance.blackCutoutController.FadeToVisible();
@@ -290,11 +293,11 @@ public class GameManager : MonoBehaviour
 
         shake.InduceMotion(3f);
         yield return null;
-        StartCoroutine(EndGame());
+        StartCoroutine(GameOverCutscene());
 
     }
 
-    IEnumerator EndGame()
+    IEnumerator GameOverCutscene()
     {
         UIManager.Instance.topHUDController.Hide();
         yield return new WaitForSecondsRealtime(1.7f);
@@ -348,5 +351,26 @@ public class GameManager : MonoBehaviour
         ScoreSystem.Instance.SetScore(0);
 
         OnGameReady?.Invoke();
+    }
+
+    public void OnGameEnd()
+    {
+        StartCoroutine(EndGame());
+    }
+
+    IEnumerator EndGame()
+    {
+        targetMusicVolume = -80;
+        yield return new WaitForSecondsRealtime(0.7f);
+
+        UIManager.Instance.blackCutoutController.FadeToBlack();
+        yield return new WaitForSecondsRealtime(0.7f);
+
+        SceneManager.LoadScene("NewMenu");
+    }
+
+    public void OnSceneLoaded()
+    {
+        mainCamera = Camera.main;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,11 +12,19 @@ public class UIManager : MonoBehaviour
     public BlackCutoutController blackCutoutController;
     public HighScoreModalController highScoreModalController;
 
+    public Button restartBtn, giveUpBtn;
+
     public void LocateHUDObjects()
     {
         energyBarController = GameObject.FindGameObjectWithTag("Energy Bar").GetComponent<EnergyBarController>();
         topHUDController = GameObject.FindGameObjectWithTag("Top HUD").GetComponent<TopHUDController>();
         highScoreModalController = GameObject.FindGameObjectWithTag("High Score Modal").GetComponent<HighScoreModalController>();
+
+        restartBtn = GameObject.FindGameObjectWithTag("Restart Button").GetComponent<Button>();
+        giveUpBtn = GameObject.FindGameObjectWithTag("Give Up Button").GetComponent<Button>();
+
+        restartBtn.onClick.AddListener(GameManager.Instance.OnRestart);
+        giveUpBtn.onClick.AddListener(GameManager.Instance.OnGameEnd);
     }
 
     private void Awake()

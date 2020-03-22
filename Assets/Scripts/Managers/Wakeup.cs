@@ -11,9 +11,11 @@ public class Wakeup : MonoBehaviour
         switch (gameState)
         {
             case GameState.InGame:
+                GameManager.Instance.OnSceneLoaded();
                 GameManager.Instance.OnGameLoaded();
                 break;
             case GameState.MainMenu:
+                GameManager.Instance.OnSceneLoaded();
                 GameManager.Instance.OnMenuLoaded();
                 break;
             default: break;
