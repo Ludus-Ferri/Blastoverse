@@ -17,3 +17,24 @@ ui.highScore New High Score!
 
 ui.loss.tryAgain Try Again
 ui.loss.giveUp Give Up
+
+splash.1 Now with 100% more asteroids!
+splash.2 Turn on Pro Mode for a real challenge!
+splash.3 Speedran!
+splash.4 An elite game from an elite school!
+splash.5 Double tapping does nothing!
+splash.6 G# G G# G
+splash.7 Also try Asteroids!
+splash.8 Made by speedrunners!
+splash.9 Blastoverse!
+splash.10 Uncapped spin speed!
+splash.11 Ruining the Kuiper Belt one by one!
+splash.12 ŻelGames!
+splash.13 Recommended by 90% of dentists!
+splash.14 Maximum framerate!
+splash.15 Ground Control to Major Tom!
+splash.16 Honk!
+splash.17 All your base are belong to us!
+splash.18 Sponsored by Raid: Shadow Legends!
+splash.19 Beaten by TheLegend27!
+splash.20 Made with Unity!

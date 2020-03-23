@@ -17,3 +17,24 @@ ui.highScore Nowy rekord!
 
 ui.loss.tryAgain Spróbuj ponownie
 ui.loss.giveUp Poddaj się
+
+splash.1 Teraz 100% więcej asteroid!
+splash.2 Włącz tryb Pro dla prawdziwego wyzwania!
+splash.3 Speedrunowany!
+splash.4 Elitarna gra z elitarnej szkoły!
+splash.5 Doubletap nic nie robi!
+splash.6 G# G G# G
+splash.7 Wypróbuj też Asteroids!
+splash.8 Stworzony przez speedrunnerów!
+splash.9 Blastoverse!
+splash.10 Nieograniczona prędkość obrotu!
+splash.11 Rujnujemy Pas Kuipera asteroida po asteroidzie!
+splash.12 ŻelGames!
+splash.13 Polecany przez 90% dentystów!
+splash.14 Maksymalna ilość klatek na sekundę!
+splash.15 Ground Control to Major Tom!
+splash.16 Honk!
+splash.17 All your base are belong to us!
+splash.18 Sponsorowany przez Raid: Shadow Legends!
+splash.19 TheLegend27 przeszedł tę grę!
+splash.20 Zrobiony w Unity!
