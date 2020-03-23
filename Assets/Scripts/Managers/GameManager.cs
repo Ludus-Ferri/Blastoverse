@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region Update Routines
+
     void UpdateAudio()
     {
         LayeredBGMPlayer.Instance.intensity = musicIntensity;
@@ -135,6 +137,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Scene Load Events
+
     public void OnGameLoaded()
     {
         gameState = GameState.InGame; 
@@ -163,11 +169,64 @@ public class GameManager : MonoBehaviour
         PlayMenuMusic();
     }
 
+    public void OnSceneLoaded()
+    {
+        mainCamera = Camera.main;
+    }
+
+    #endregion
+
+    #region Game Events
+    public void OnLoss()
+    {
+        isHighScore = false;
+        playerController.controlsEnabled = false;
+        ScoreSystem.Instance.lockScore = true;
+
+        targetMusicCutoff = musicLossLowpass;
+
+        long highScore = HighScoreSystem.Instance.GetHighScore();
+
+        if (highScore == -1)
+        {
+            HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
+        }
+        else
+        {
+            if (ScoreSystem.Instance.Score > highScore)
+            {
+                isHighScore = true;
+                HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
+            }
+        }
+
+        StartCoroutine(PlayerExplodeCutscene());
+
+        anim.SetTrigger("DestructionPause");
+    }
+
+    public void OnRestart()
+    {
+        Debug.Log("Restarting!");
+        StartCoroutine(RestartGame());
+    }
+
+    public void OnGameEnd()
+    {
+        StartCoroutine(EndGame());
+    }
+
+    #endregion
+
+    #region UI Events
     public void OnMenuEnd()
     {
         StartCoroutine(EndMenu());
     }
 
+    #endregion
+
+    #region Cutscenes
     IEnumerator BeginGame()
     {
         targetMusicCutoff = 22000;
@@ -213,60 +272,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    void PlayGameMusic()
-    {
-        LayeredBGMPlayer.Instance.currentBGM = gameMusic;
-        LayeredBGMPlayer.Instance.LoadBGM();
-        LayeredBGMPlayer.Instance.Play();
-    }
-
-    void PlayMenuMusic()
-    {
-        LayeredBGMPlayer.Instance.currentBGM = menuMusic;
-        LayeredBGMPlayer.Instance.LoadBGM();
-        LayeredBGMPlayer.Instance.Play();
-    }
-
-    void FindGameObjects()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        playerController = player.GetComponent<PlayerController>();
-        playerEnergySystem = player.GetComponent<PlayerEnergySystem>();
-
-        mainCamera = Camera.main;
-        mainEffectManager = mainCamera.GetComponent<CameraEffectManager>();
-
-        asteroidPool = GameObject.FindGameObjectWithTag("Asteroid Pool").GetComponent<ObjectPooler>();
-    }
-
-    public void OnLoss()
-    {
-        isHighScore = false;
-        playerController.controlsEnabled = false;
-        ScoreSystem.Instance.lockScore = true;
-
-        targetMusicCutoff = musicLossLowpass;
-
-        long highScore = HighScoreSystem.Instance.GetHighScore();
-
-        if (highScore == -1)
-        {
-            HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
-        }
-        else
-        {
-            if (ScoreSystem.Instance.Score > highScore)
-            {
-                isHighScore = true;
-                HighScoreSystem.Instance.StoreScore(ScoreSystem.Instance.Score);
-            }
-        }
-
-        StartCoroutine(PlayerExplodeCutscene());
-
-        anim.SetTrigger("DestructionPause");
-    }
-
     IEnumerator PlayerExplodeCutscene()
     {
         AudioManager.Instance.PlaySoundAtPosition(AudioManager.Instance.GetSound("Player Explosion"), playerController.transform.position);
@@ -304,12 +309,6 @@ public class GameManager : MonoBehaviour
         targetMusicVolume = musicLossVolume;
         UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
         UIManager.Instance.highScoreModalController.Show();
-    }
-
-    public void OnRestart()
-    {
-        Debug.Log("Restarting!");
-        StartCoroutine(RestartGame());
     }
 
     IEnumerator RestartGame()
@@ -353,10 +352,7 @@ public class GameManager : MonoBehaviour
         OnGameReady?.Invoke();
     }
 
-    public void OnGameEnd()
-    {
-        StartCoroutine(EndGame());
-    }
+
 
     IEnumerator EndGame()
     {
@@ -368,9 +364,37 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("NewMenu");
     }
+    #endregion
 
-    public void OnSceneLoaded()
+    #region Music
+    void PlayGameMusic()
     {
-        mainCamera = Camera.main;
+        LayeredBGMPlayer.Instance.currentBGM = gameMusic;
+        LayeredBGMPlayer.Instance.LoadBGM();
+        LayeredBGMPlayer.Instance.Play();
     }
+
+    void PlayMenuMusic()
+    {
+        LayeredBGMPlayer.Instance.currentBGM = menuMusic;
+        LayeredBGMPlayer.Instance.LoadBGM();
+        LayeredBGMPlayer.Instance.Play();
+    }
+    #endregion
+
+    #region Miscellaneous
+
+    void FindGameObjects()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+        playerEnergySystem = player.GetComponent<PlayerEnergySystem>();
+
+        mainCamera = Camera.main;
+        mainEffectManager = mainCamera.GetComponent<CameraEffectManager>();
+
+        asteroidPool = GameObject.FindGameObjectWithTag("Asteroid Pool").GetComponent<ObjectPooler>();
+    }
+
+    #endregion
 }
