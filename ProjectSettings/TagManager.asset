@@ -17,6 +17,10 @@ TagManager:
   - Asteroid Generator
   - Restart Button
   - Give Up Button
+  - Play Button
+  - Options Button
+  - Quit Button
+  - Splash Text
   layers:
   - Default
   - TransparentFX

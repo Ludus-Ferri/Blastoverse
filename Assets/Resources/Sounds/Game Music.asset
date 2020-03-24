@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Game Music
   m_EditorClassIdentifier: 
   tracks:
-  - clip: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 957cf62ccf1b02a4ab17614b05ac3d07, type: 3}
     loudnessCurve:
       serializedVersion: 2
       m_Curve:
