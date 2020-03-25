@@ -77,7 +77,10 @@ public class GameManager : MonoBehaviour
 
         LocalizedStringManager.Init();
         LocalizedStringManager.ParseTranslations();
-        LocalizedStringManager.SetCulture(CultureInfo.CurrentCulture.Name);
+
+        string currentCultureName = Localizer.GetCurrentCultureInfo().Name;
+        Debug.LogFormat("Current culture: {0}", currentCultureName);
+        LocalizedStringManager.SetCulture(currentCultureName);
 
         targetTimeScale = 1;
     }
