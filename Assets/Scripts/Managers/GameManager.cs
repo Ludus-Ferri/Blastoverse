@@ -203,10 +203,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PlayerExplodeCutscene());
 
         anim.SetTrigger("DestructionPause");
+            
     }
 
     public void OnRestart()
     {
+        /*foreach (GameObject asteroid in asteroidPool.objects)
+        {
+            Vector2 onLoss = new Vector2(gameObject.transform.position.x, gameObject.transform.position.x).normalized;
+            onLoss = onLoss * 100;
+            asteroid.GetComponent<Rigidbody2D>().AddForce(onLoss);
+        }*/
         Debug.Log("Restarting!");
         StartCoroutine(RestartGame());
     }
@@ -312,7 +319,7 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator RestartGame()
-    {
+    { 
         CameraShake shake = mainEffectManager.GetEffect<CameraShake>();
 
         UIManager.Instance.highScoreModalController.Hide();

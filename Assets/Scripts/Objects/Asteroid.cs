@@ -11,6 +11,7 @@ public class Asteroid : MonoBehaviour
     public float spawnDistance;
     public float initialMoveSpeed, initialMoveRotation;
     public float moveDeviationScale;
+    public float onLossSpeed;
 
     public float colliderSizeFactor;
 
