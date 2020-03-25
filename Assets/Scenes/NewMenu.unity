@@ -2052,6 +2052,11 @@ PrefabInstance:
       propertyPath: gameState
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5238916509260826142, guid: b7a22bd9fe679aa46a579e1dac03a85a,
+        type: 3}
+      propertyPath: restartAsteroidRepelForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5238916509661073361, guid: b7a22bd9fe679aa46a579e1dac03a85a,
         type: 3}
       propertyPath: blackCutoutController

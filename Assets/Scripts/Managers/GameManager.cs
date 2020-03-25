@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public float targetTimeScale;
     public float targetZoom;
     public float playerExplosionAsteroidRepelForce;
+    public float restartAsteroidRepelForce;
     public bool isHighScore;
 
     [Header("Particles")]
@@ -208,12 +209,6 @@ public class GameManager : MonoBehaviour
 
     public void OnRestart()
     {
-        /*foreach (GameObject asteroid in asteroidPool.objects)
-        {
-            Vector2 onLoss = new Vector2(gameObject.transform.position.x, gameObject.transform.position.x).normalized;
-            onLoss = onLoss * 100;
-            asteroid.GetComponent<Rigidbody2D>().AddForce(onLoss);
-        }*/
         Debug.Log("Restarting!");
         StartCoroutine(RestartGame());
     }
@@ -325,6 +320,18 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.highScoreModalController.Hide();
         yield return new WaitForSecondsRealtime(0.5f);
         UIManager.Instance.highScoreModalController.gameObject.SetActive(false);
+
+        foreach (GameObject asteroid in asteroidPool.objects)
+        {
+            if (asteroid.activeInHierarchy)
+            {
+                Vector2 force = new Vector2(asteroid.transform.position.x, asteroid.transform.position.y).normalized;
+
+                Rigidbody2D rb2d = asteroid.GetComponent<Rigidbody2D>();
+                rb2d.velocity = force * restartAsteroidRepelForce;
+                rb2d.AddTorque(GenericRNG.Instance.NextFloat(-1, 1) * restartAsteroidRepelForce * 30);
+            }
+        }
 
         Instantiate(playerReviveParticle, playerController.transform.position, Quaternion.identity);
 
