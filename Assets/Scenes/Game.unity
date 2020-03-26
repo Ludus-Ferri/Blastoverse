@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1205,6 +1205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textID: ui.loss.giveUp
   setOnAwake: 1
+  withVariants: 0
 --- !u!1 &1122652408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2854,6 +2855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textID: ui.loss.tryAgain
   setOnAwake: 1
+  withVariants: 0
 --- !u!4 &2109537262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2362234774323941810, guid: bab82d6c68b11044c899f65d83639b55,

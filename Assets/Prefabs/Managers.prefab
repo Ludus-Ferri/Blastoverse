@@ -243,6 +243,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5238916509037435538}
   - component: {fileID: 5238916509037435539}
+  - component: {fileID: 7214125118458530414}
+  - component: {fileID: 1956899440}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -283,6 +285,30 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40cb7386f7adb0b4e9ad1443fcb58994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7214125118458530414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238916509037435536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366b2ee731892c2419bac0881da991ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1956899440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238916509037435536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a0f489571c69c499e9e969b455d705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5238916509175626306
@@ -389,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3a462ad0948374db916ea3b6a4fa74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 1
+  gameState: 0
   screenWidth: 0
   screenHeight: 0
   mainCamera: {fileID: 0}
@@ -402,6 +428,7 @@ MonoBehaviour:
   targetTimeScale: 1
   targetZoom: 5
   playerExplosionAsteroidRepelForce: 50
+  restartAsteroidRepelForce: 8
   isHighScore: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
@@ -414,6 +441,8 @@ MonoBehaviour:
   musicLossVolume: -20
   musicVolumeSmoothing: 1
   musicIntensity: 0
+  targetMusicCutoff: 0
+  targetMusicVolume: 0
 --- !u!95 &5238916509260826137
 Animator:
   serializedVersion: 3
@@ -523,3 +552,5 @@ MonoBehaviour:
   topHUDController: {fileID: 0}
   blackCutoutController: {fileID: 0}
   highScoreModalController: {fileID: 0}
+  restartBtn: {fileID: 0}
+  giveUpBtn: {fileID: 0}
