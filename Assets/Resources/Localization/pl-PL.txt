@@ -5,6 +5,27 @@ ui.quitButton Wyjdź
 ui.options.title Opcje
 ui.options.backButton Powróć
 
+ui.options.sound Dźwięk
+ui.options.graphics Grafika
+ui.options.language Język
+ui.options.other Inne
+
+ui.options.sound.musicVolume Muzyka
+ui.options.sound.sfxVolume Efekty dźwiękowe
+
+ui.options.graphics.postproc Efekty wizualne
+ui.options.graphics.bloom Świecenie
+ui.options.graphics.aberration Aberracja chromatyczna
+ui.options.graphics.fisheye Rybie oko
+ui.options.graphics.grain Ziarnistość
+
+ui.options.graphics.maxFPS Maksymalne FPSy
+
+ui.options.other.resetHighScore Zresetuj rekord
+ui.options.other.credits Twórcy
+ui.options.other.invertControls.enabled Sterowanie odwrócone
+ui.options.other.invertControls.disabled Sterowanie normalne  
+
 game.loss.1 Zostałeś zestrzelony.
 game.loss.2 Get rekt!
 game.loss.3 Przegrałeś.

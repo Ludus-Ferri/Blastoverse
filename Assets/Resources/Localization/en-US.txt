@@ -5,6 +5,27 @@ ui.quitButton Quit
 ui.options.title Options
 ui.options.backButton Back
 
+ui.options.sound Sound
+ui.options.graphics Graphics
+ui.options.language Language
+ui.options.other Other
+
+ui.options.sound.musicVolume Music
+ui.options.sound.sfxVolume Sound Effects
+
+ui.options.graphics.postproc Screen FX
+ui.options.graphics.bloom Bloom
+ui.options.graphics.aberration Chromatic Aberration
+ui.options.graphics.fisheye Fisheye
+ui.options.graphics.grain Grain
+
+ui.options.graphics.maxFPS Max Framerate
+
+ui.options.other.resetHighScore Reset High Score
+ui.options.other.credits Credits
+ui.options.other.invertControls.enabled Inverted Controls
+ui.options.other.invertControls.disabled Normal Controls
+
 game.loss.1 You got shot.
 game.loss.2 Get rekt!
 game.loss.3 You lose.
