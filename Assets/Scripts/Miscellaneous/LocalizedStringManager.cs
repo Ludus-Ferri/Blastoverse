@@ -10,6 +10,8 @@ public class LocalizedStringManager
 {
     public static Dictionary<CultureInfo, Dictionary<string, string>> dictionary;
 
+    public static Dictionary<CultureInfo, Dictionary<string, Dictionary<int, string>>> variantDictionary;
+
     public static CultureInfo currentCulture;
     public static List<string> availableCultures;
 
@@ -18,6 +20,7 @@ public class LocalizedStringManager
     public static void Init()
     {
         dictionary = new Dictionary<CultureInfo, Dictionary<string, string>>();
+        variantDictionary = new Dictionary<CultureInfo, Dictionary<string, Dictionary<int, string>>>();
 
         GetCultures();
     }
@@ -32,6 +35,7 @@ public class LocalizedStringManager
         {
             availableCultures.Add(asset.name);
             dictionary.Add(CultureInfo.GetCultureInfo(asset.name), new Dictionary<string, string>());
+            variantDictionary.Add(CultureInfo.GetCultureInfo(asset.name), new Dictionary<string, Dictionary<int, string>>());
         }
     }
 
@@ -46,9 +50,29 @@ public class LocalizedStringManager
                 foreach (string line in lines)
                 {
                     if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line)) continue;
+                    if (line[0] == '#') continue;
 
                     string key = line.Substring(0, line.IndexOf(' '));
                     string value = line.Substring(line.IndexOf(' ') + 1);
+                    int lastIndexOfDot;
+
+                    if (int.TryParse(key.Substring((lastIndexOfDot = key.LastIndexOf('.')) + 1), out int variant))
+                    {
+                        string variantKey = key.Substring(0, lastIndexOfDot);
+                        if (variantDictionary[CultureInfo.GetCultureInfo(asset.name)].ContainsKey(variantKey))
+                            variantDictionary[CultureInfo.GetCultureInfo(asset.name)][variantKey].Add(variant, value);
+                        else
+                        {
+                            variantDictionary[CultureInfo.GetCultureInfo(asset.name)].Add(variantKey, new Dictionary<int, string>() 
+                            {
+                                {
+                                    variant,
+                                    value
+                                }
+                            });
+                        }
+                    }
+
 
                     dictionary[CultureInfo.GetCultureInfo(asset.name)].Add(key, value);
                 }
@@ -77,5 +101,12 @@ public class LocalizedStringManager
         if (!dictionary[currentCulture].ContainsKey(baseString))
             return baseString;
         return dictionary[currentCulture][baseString];
+    }
+
+    public static string GetLocalizedStringRandomVariant(string baseString)
+    {
+        if (!variantDictionary[currentCulture].ContainsKey(baseString))
+            return baseString;
+        return variantDictionary[currentCulture][baseString].ElementAt(Mathf.RoundToInt(UnityEngine.Random.Range(0, variantDictionary[currentCulture][baseString].Count))).Value;
     }
 }

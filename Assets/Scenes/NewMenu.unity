@@ -437,7 +437,6 @@ GameObject:
   - component: {fileID: 381087188}
   - component: {fileID: 381087187}
   - component: {fileID: 381087186}
-  - component: {fileID: 381087189}
   m_Layer: 5
   m_Name: Splash Text
   m_TagString: Untagged
@@ -476,8 +475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef118f664f01534d93515ffe7423323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textID: 
-  setOnAwake: 0
+  textID: splash
+  setOnAwake: 1
+  withVariants: 1
 --- !u!114 &381087187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,20 +597,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381087184}
   m_CullTransparentMesh: 0
---- !u!114 &381087189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381087184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29073f25987c51741aa258c4624b80ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  splashStringPrefix: splash
-  splashCount: 20
 --- !u!1 &440697014
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,6 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textID: ui.quitButton
   setOnAwake: 1
+  withVariants: 0
 --- !u!114 &440697017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textID: ui.options.backButton
   setOnAwake: 1
+  withVariants: 0
 --- !u!114 &728942609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,6 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textID: ui.options.title
   setOnAwake: 1
+  withVariants: 0
 --- !u!114 &734501473
 MonoBehaviour:
   m_ObjectHideFlags: 0
