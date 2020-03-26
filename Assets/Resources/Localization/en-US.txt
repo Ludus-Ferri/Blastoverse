@@ -2,6 +2,9 @@ ui.playButton Play
 ui.optionsButton Options
 ui.quitButton Quit
 
+ui.options.title Options
+ui.options.backButton Back
+
 game.loss.1 You got shot.
 game.loss.2 Get rekt!
 game.loss.3 You lose.

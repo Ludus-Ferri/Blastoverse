@@ -178,6 +178,12 @@ public class GameManager : MonoBehaviour
         mainCamera = Camera.main;
     }
 
+    public void OnQuitGame()
+    {
+        Debug.Log("Quitting!");
+        Application.Quit();
+    }
+
     #endregion
 
     #region Game Events

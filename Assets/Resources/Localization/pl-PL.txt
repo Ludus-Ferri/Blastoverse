@@ -2,6 +2,9 @@ ui.playButton Graj
 ui.optionsButton Opcje
 ui.quitButton Wyjdź
 
+ui.options.title Opcje
+ui.options.backButton Powróć
+
 game.loss.1 Zostałeś zestrzelony.
 game.loss.2 Get rekt!
 game.loss.3 Przegrałeś.
