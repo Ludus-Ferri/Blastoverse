@@ -19,6 +19,8 @@ ui.options.graphics.aberration Chromatic Aberration
 ui.options.graphics.fisheye Fisheye
 ui.options.graphics.grain Grain
 
+ui.options.graphics.applyButton Apply
+
 ui.options.graphics.maxFPS Max Framerate
 
 ui.options.other.resetHighScore Reset High Score

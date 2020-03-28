@@ -19,6 +19,8 @@ ui.options.graphics.aberration Aberracja chromatyczna
 ui.options.graphics.fisheye Rybie oko
 ui.options.graphics.grain Ziarnistość
 
+ui.options.graphics.applyButton Zastosuj
+
 ui.options.graphics.maxFPS Maksymalne FPSy
 
 ui.options.other.resetHighScore Zresetuj rekord

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -52,6 +54,9 @@ public class GameManager : MonoBehaviour
     float defaultZoom;
     public float targetMusicCutoff, targetMusicVolume;
 
+    [Header("Post Processing")]
+    public VolumeProfile postProcessingProfile;
+
     private Animator anim;
 
     public delegate void OnGameReadyDelegate();
@@ -80,7 +85,20 @@ public class GameManager : MonoBehaviour
 
         string currentCultureName = Localizer.GetCurrentCultureInfo().Name;
         Debug.LogFormat("Current culture: {0}", currentCultureName);
-        LocalizedStringManager.SetCulture(currentCultureName);
+
+        Options.Load();
+        Debug.LogFormat("Loading culture {0}", Options.currentCulture.Name);
+        if (Options.currentCulture == null)
+        {
+            Debug.Log("Setting current culture!");
+            if (!LocalizedStringManager.availableCultures.Contains(currentCultureName))
+            {
+                Debug.LogFormat("Culture {0} is not supported, defaulting to en-US");
+                Options.currentCulture = CultureInfo.GetCultureInfo("en-US");
+            }
+        }
+        LocalizedStringManager.SetCulture(Options.currentCulture.Name);
+        Options.Save();
 
         targetTimeScale = 1;
     }
@@ -96,14 +114,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         mainCamera.backgroundColor = backgroundColor;
-
-        if (gameState == GameState.MainMenu)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                OnMenuEnd();
-            }
-        }
     }
 
     #region Update Routines

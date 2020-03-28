@@ -46,6 +46,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void HideOptionsMenu()
     {
+        Options.Save();
+
         StartCoroutine(AnimateHideOptions());
     }
 
