@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public BlackCutoutController blackCutoutController;
     public HighScoreModalController highScoreModalController;
 
-    public Button restartBtn, giveUpBtn;
+    public Button restartBtn, giveUpBtn, pauseBtn;
 
     public void LocateHUDObjects()
     {
@@ -22,9 +22,12 @@ public class UIManager : MonoBehaviour
 
         restartBtn = GameObject.FindGameObjectWithTag("Restart Button").GetComponent<Button>();
         giveUpBtn = GameObject.FindGameObjectWithTag("Give Up Button").GetComponent<Button>();
+        pauseBtn = GameObject.FindGameObjectWithTag("Pause Button").GetComponent<Button>();
 
         restartBtn.onClick.AddListener(GameManager.Instance.OnRestart);
         giveUpBtn.onClick.AddListener(GameManager.Instance.OnGameEnd);
+        pauseBtn.onClick.AddListener(OnPauseButtonClicked);
+
     }
 
     private void Awake()
@@ -44,5 +47,10 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.gameState == GameState.InGame)
             energyBarController.value = GameManager.Instance.playerEnergySystem.energy / GameManager.Instance.playerEnergySystem.maxEnergy;
+    }
+
+    public void OnPauseButtonClicked()
+    {
+        GameManager.Instance.OnPauseUnpause();
     }
 }

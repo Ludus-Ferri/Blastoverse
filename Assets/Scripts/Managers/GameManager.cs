@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public float playerExplosionAsteroidRepelForce;
     public float restartAsteroidRepelForce;
     public bool isHighScore;
+    public bool paused;
 
     [Header("Particles")]
     public GameObject playerExplosionParticle;
@@ -53,6 +54,8 @@ public class GameManager : MonoBehaviour
 
     float defaultZoom;
     public float targetMusicCutoff, targetMusicVolume;
+
+    public float audioDeltaTime;
 
     [Header("Post Processing")]
     public VolumeProfile postProcessingProfile;
@@ -151,11 +154,11 @@ public class GameManager : MonoBehaviour
         LayeredBGMPlayer.Instance.intensity = musicIntensity;
 
         AudioManager.Instance.music.audioMixer.GetFloat("MusicLowpass", out float cutoff);
-        AudioManager.Instance.music.audioMixer.SetFloat("MusicLowpass", MathHelper.Logerp(cutoff, targetMusicCutoff, Time.unscaledDeltaTime / musicLowpassSmoothing));
+        AudioManager.Instance.music.audioMixer.SetFloat("MusicLowpass", MathHelper.Logerp(cutoff, targetMusicCutoff, audioDeltaTime / musicLowpassSmoothing));
 
         AudioManager.Instance.music.audioMixer.GetFloat("MusicVolume", out float volume);
         volume += 100;
-        AudioManager.Instance.music.audioMixer.SetFloat("MusicVolume", MathHelper.Logerp(volume, targetMusicVolume + 100, Time.unscaledDeltaTime / musicVolumeSmoothing) - 100);
+        AudioManager.Instance.music.audioMixer.SetFloat("MusicVolume", MathHelper.Logerp(volume, targetMusicVolume + 100, audioDeltaTime / musicVolumeSmoothing) - 100);
     }
 
     IEnumerator UnscaledUpdate()
@@ -175,7 +178,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             UpdateAudio();
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(audioDeltaTime);
         }
     }
 
@@ -185,7 +188,8 @@ public class GameManager : MonoBehaviour
 
     public void OnGameLoaded()
     {
-        gameState = GameState.InGame; 
+        gameState = GameState.InGame;
+        paused = false;
         FindGameObjects();
 
         UIManager.Instance.LocateHUDObjects();
@@ -248,10 +252,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        StartCoroutine(PlayerExplodeCutscene());
-
-        anim.SetTrigger("DestructionPause");
-            
+        StartCoroutine(PlayerExplodeCutscene());            
     }
 
     public void OnRestart()
@@ -263,6 +264,12 @@ public class GameManager : MonoBehaviour
     public void OnGameEnd()
     {
         StartCoroutine(EndGame());
+    }
+
+    public void OnPauseUnpause()
+    {
+        paused ^= true;
+        targetTimeScale = paused ? 0 : 1;
     }
 
     #endregion
@@ -325,6 +332,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerExplodeCutscene()
     {
+        anim.enabled = true;
+        yield return null;
+        anim.SetTrigger("DestructionPause");
+
         AudioManager.Instance.PlaySoundAtPosition(AudioManager.Instance.GetSound("Player Explosion"), playerController.transform.position);
 
         float time = Time.unscaledTime;
@@ -357,6 +368,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.topHUDController.Hide();
         yield return new WaitForSecondsRealtime(1.7f);
+        anim.enabled = false;
         targetMusicVolume = musicLossVolume;
         UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
         UIManager.Instance.highScoreModalController.Show();

@@ -21,6 +21,7 @@ TagManager:
   - Options Button
   - Quit Button
   - Splash Text
+  - Pause Button
   layers:
   - Default
   - TransparentFX

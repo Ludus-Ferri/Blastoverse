@@ -430,6 +430,7 @@ MonoBehaviour:
   playerExplosionAsteroidRepelForce: 50
   restartAsteroidRepelForce: 8
   isHighScore: 0
+  paused: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
   playerReviveParticle: {fileID: 412925607502107111, guid: b22a3f7d72500fa4b9a2f1d7fc77c9dd,
@@ -441,8 +442,9 @@ MonoBehaviour:
   musicLossVolume: -20
   musicVolumeSmoothing: 1
   musicIntensity: 0
-  targetMusicCutoff: 0
+  targetMusicCutoff: 22000
   targetMusicVolume: 0
+  audioDeltaTime: 0.1
   postProcessingProfile: {fileID: 11400000, guid: e2d8d5d9d94aa1943970430f26c159a5,
     type: 2}
 --- !u!95 &5238916509260826137
@@ -453,7 +455,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5238916509260826140}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 30e1d6efbc93a7f4c947dc9e57416640, type: 2}
   m_CullingMode: 0
@@ -556,3 +558,4 @@ MonoBehaviour:
   highScoreModalController: {fileID: 0}
   restartBtn: {fileID: 0}
   giveUpBtn: {fileID: 0}
+  pauseBtn: {fileID: 0}
