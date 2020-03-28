@@ -80,11 +80,13 @@ public class OptionsMenuManager : MonoBehaviour
     public void OnMusicVolumeChanged(float value)
     {
         Options.musicVolume = value;
+        Options.ApplyAudio();
     }
 
     public void OnSfxVolumeChanged(float value)
     {
         Options.sfxVolume = value;
+        Options.ApplyAudio();
     }
 
     public void OnEnableBloomChanged(bool value)
@@ -124,6 +126,8 @@ public class OptionsMenuManager : MonoBehaviour
         Options.currentCulture = CultureInfo.GetCultureInfo(LocalizedStringManager.availableCultures[choice]);
 
         Options.SaveLanguage();
+        Options.ApplyLanguage();
+        LocalizedTextRegistry.UpdateAll();
 
     }
 

@@ -15,6 +15,8 @@ public class LocalizedText : MonoBehaviour
     {
         text = GetComponent<TMP_Text>();
 
+        LocalizedTextRegistry.Register(this);
+
         if (setOnAwake) SetText(textID);
     }
 

@@ -73,12 +73,22 @@ public class Options
 
     public static void Apply()
     {
-        LocalizedStringManager.SetCulture(currentCulture.Name);
-
-        AudioManager.Instance.master.audioMixer.SetFloat("RawMusicVolume", musicVolume);
-        AudioManager.Instance.master.audioMixer.SetFloat("RawSFXVolume", sfxVolume);
+        ApplyLanguage();
+        ApplyAudio();
+        ApplyGraphics();
 
         // TODO: Invert controls
+    }
+
+    public static void ApplyLanguage()
+    {
+        LocalizedStringManager.SetCulture(currentCulture.Name);
+    }
+
+    public static void ApplyAudio()
+    {
+        AudioManager.Instance.master.audioMixer.SetFloat("RawMusicVolume", musicVolume);
+        AudioManager.Instance.master.audioMixer.SetFloat("RawSFXVolume", sfxVolume);
     }
 
     public static void ApplyGraphics()

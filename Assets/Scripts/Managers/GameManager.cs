@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour
         string currentCultureName = Localizer.GetCurrentCultureInfo().Name;
         Debug.LogFormat("Current culture: {0}", currentCultureName);
 
+        LocalizedTextRegistry.Clear();
+
         Options.Load();
         Debug.LogFormat("Loading culture {0}", Options.currentCulture.Name);
         if (Options.currentCulture == null)
