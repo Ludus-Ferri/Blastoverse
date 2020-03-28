@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
 
         mainCamera = Camera.main;
 
+        QualitySettings.vSyncCount = 0;
+
         LocalizedStringManager.Init();
         LocalizedStringManager.ParseTranslations();
 
@@ -108,6 +110,9 @@ public class GameManager : MonoBehaviour
             }
         }
         LocalizedStringManager.SetCulture(Options.currentCulture.Name);
+
+        Options.ApplyGraphics();
+
         Options.Save();
 
         targetTimeScale = 1;
@@ -127,6 +132,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Options.ApplyAudio();
+
         StartCoroutine(UnscaledUpdate());
         StartCoroutine(AudioUpdate());
     }
@@ -168,7 +175,7 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             UpdateAudio();
-            yield return new WaitForSecondsRealtime(0.01f);
+            yield return new WaitForSecondsRealtime(0.1f);
         }
     }
 
@@ -271,6 +278,8 @@ public class GameManager : MonoBehaviour
     #region Cutscenes
     IEnumerator BeginGame()
     {
+        yield return new WaitForSecondsRealtime(0.9f);
+
         targetMusicCutoff = 22000;
         targetMusicVolume = 0;
 
