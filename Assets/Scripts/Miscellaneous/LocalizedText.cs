@@ -26,4 +26,9 @@ public class LocalizedText : MonoBehaviour
 
         text.text = withVariants ? LocalizedStringManager.GetLocalizedStringRandomVariant(textID) : LocalizedStringManager.GetLocalizedString(textID);
     }
+
+    private void OnDestroy()
+    {
+        LocalizedTextRegistry.Unregister(this);
+    }
 }

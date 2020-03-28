@@ -19,6 +19,11 @@ public class LocalizedTextRegistry
         texts.Add(text);
     }
 
+    public static void Unregister(LocalizedText text)
+    {
+        texts.Remove(text);
+    }
+
     public static void UpdateAll()
     {
         foreach (LocalizedText text in texts)

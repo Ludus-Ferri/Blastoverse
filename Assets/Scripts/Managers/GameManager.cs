@@ -88,7 +88,15 @@ public class GameManager : MonoBehaviour
 
         LocalizedTextRegistry.Clear();
 
+        bool isFirstLoad = IsFirstLoad();
+
         Options.Load();
+        
+        if (isFirstLoad)
+        {
+            Options.currentCulture = CultureInfo.GetCultureInfo(currentCultureName);
+        }
+
         Debug.LogFormat("Loading culture {0}", Options.currentCulture.Name);
         if (Options.currentCulture == null)
         {
@@ -103,6 +111,17 @@ public class GameManager : MonoBehaviour
         Options.Save();
 
         targetTimeScale = 1;
+    }
+
+    bool IsFirstLoad()
+    {
+        if (!PlayerPrefs.HasKey("FirstLoad"))
+        {
+            PlayerPrefs.SetInt("FirstLoad", 0);
+            PlayerPrefs.Save();
+            return true;
+        }
+        return false;
     }
 
     // Start is called before the first frame update
