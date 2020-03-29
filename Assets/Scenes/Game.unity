@@ -421,18 +421,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 236531663}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1899702963}
-        m_MethodName: OnPauseButtonClicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &236531663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2660,18 +2649,6 @@ MonoBehaviour:
   zoom: 0
   magnitude: 0.3
   smoothing: 11
---- !u!114 &1899702963 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5238916509661073361, guid: b7a22bd9fe679aa46a579e1dac03a85a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5238916507825818333}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1bcdc3bcf2cc564fa27dbc833813072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1909760550
 GameObject:
   m_ObjectHideFlags: 0

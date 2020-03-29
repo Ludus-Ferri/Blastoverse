@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public float restartAsteroidRepelForce;
     public bool isHighScore;
     public bool paused;
+    public bool canPause;
 
     [Header("Particles")]
     public GameObject playerExplosionParticle;
@@ -119,6 +120,8 @@ public class GameManager : MonoBehaviour
         Options.Save();
 
         targetTimeScale = 1;
+
+        OnGameReady += () => canPause = true;
     }
 
     bool IsFirstLoad()
@@ -268,8 +271,12 @@ public class GameManager : MonoBehaviour
 
     public void OnPauseUnpause()
     {
-        paused ^= true;
-        targetTimeScale = paused ? 0 : 1;
+        if (canPause)
+        {
+            paused ^= true;
+            anim.SetBool(paused ? "Pause" : "Unpause", true);
+            anim.SetBool(!paused ? "Pause" : "Unpause", false);
+        }
     }
 
     #endregion
@@ -332,9 +339,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerExplodeCutscene()
     {
-        anim.enabled = true;
-        yield return null;
-        anim.SetTrigger("DestructionPause");
+        anim.SetBool("DestructionPause", true);
+        yield return new WaitWhile(() => paused);
+
+        canPause = false;
 
         AudioManager.Instance.PlaySoundAtPosition(AudioManager.Instance.GetSound("Player Explosion"), playerController.transform.position);
 
@@ -347,6 +355,7 @@ public class GameManager : MonoBehaviour
             shake.InduceMotion(0.5f * Time.unscaledDeltaTime);
             yield return null;
         }
+        anim.SetBool("DestructionPause", false);
 
         Instantiate(playerExplosionParticle, playerController.transform.position + Vector3.forward * -1, Quaternion.identity);
         playerController.gameObject.SetActive(false);
@@ -368,7 +377,6 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.topHUDController.Hide();
         yield return new WaitForSecondsRealtime(1.7f);
-        anim.enabled = false;
         targetMusicVolume = musicLossVolume;
         UIManager.Instance.highScoreModalController.gameObject.SetActive(true);
         UIManager.Instance.highScoreModalController.Show();
@@ -413,7 +421,7 @@ public class GameManager : MonoBehaviour
 
         playerController.gameObject.SetActive(true);
         playerController.controlsEnabled = true;
-        playerController.isDead = false;
+        playerController.invulnerable = false;
 
         shake.InduceMotion(2f);
 

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isShooting;
 
-    public bool isDead = false;
+    public bool invulnerable = false;
 
     [Header("Sound Effects")]
     public Sound shootSFX;
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isDead = false;
+        invulnerable = false;
     }
 
     // Update is called once per frame
@@ -283,9 +283,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Asteroid(Clone)" && !isDead)
+        if (collision.gameObject.name == "Asteroid(Clone)" && !invulnerable)
         {
-            isDead = true;
+            invulnerable = true;
 
             collision.attachedRigidbody.velocity *= 0.1f;
             GameManager.Instance.OnLoss();
