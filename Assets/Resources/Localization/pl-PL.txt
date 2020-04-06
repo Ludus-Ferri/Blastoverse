@@ -28,6 +28,10 @@ ui.options.other.credits Twórcy
 ui.options.other.invertControls.enabled Sterowanie odwrócone
 ui.options.other.invertControls.disabled Sterowanie normalne  
 
+ui.pause.text Pauza
+ui.pause.resumeButton Wróć do gry
+ui.pause.quitButton Wyjdź
+
 game.loss.1 Zostałeś zestrzelony.
 game.loss.2 Get rekt!
 game.loss.3 Przegrałeś.

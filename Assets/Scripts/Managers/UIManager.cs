@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public TopHUDController topHUDController;
     public BlackCutoutController blackCutoutController;
     public HighScoreModalController highScoreModalController;
+    public PauseMenuManager pauseMenuManager;
 
     public Button restartBtn, giveUpBtn, pauseBtn;
 
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
         energyBarController = GameObject.FindGameObjectWithTag("Energy Bar").GetComponent<EnergyBarController>();
         topHUDController = GameObject.FindGameObjectWithTag("Top HUD").GetComponent<TopHUDController>();
         highScoreModalController = GameObject.FindGameObjectWithTag("High Score Modal").GetComponent<HighScoreModalController>();
+        pauseMenuManager = GameObject.FindGameObjectWithTag("Pause Menu").GetComponent<PauseMenuManager>();
 
         restartBtn = GameObject.FindGameObjectWithTag("Restart Button").GetComponent<Button>();
         giveUpBtn = GameObject.FindGameObjectWithTag("Give Up Button").GetComponent<Button>();

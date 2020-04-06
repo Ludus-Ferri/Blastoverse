@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public LayeredBGM menuMusic;
 
     public float musicLossLowpass;
+    public float musicPauseLowpass;
     public float musicLowpassSmoothing;
 
     public float musicLossVolume;
@@ -118,8 +119,6 @@ public class GameManager : MonoBehaviour
         Options.ApplyGraphics();
 
         Options.Save();
-
-        targetTimeScale = 1;
 
         OnGameReady += () => canPause = true;
     }
@@ -221,6 +220,9 @@ public class GameManager : MonoBehaviour
     public void OnSceneLoaded()
     {
         mainCamera = Camera.main;
+
+        anim.SetBool("Unpause", true);
+        anim.SetBool("Pause", false);
     }
 
     public void OnQuitGame()
@@ -276,6 +278,11 @@ public class GameManager : MonoBehaviour
             paused ^= true;
             anim.SetBool(paused ? "Pause" : "Unpause", true);
             anim.SetBool(!paused ? "Pause" : "Unpause", false);
+
+            UIManager.Instance.pauseBtn.GetComponent<Animator>().Play(paused ? "Hide" : "Show");
+            UIManager.Instance.pauseMenuManager.SetVisible(paused);
+
+            targetMusicCutoff = paused ? musicPauseLowpass : 22000;
         }
     }
 
@@ -292,6 +299,8 @@ public class GameManager : MonoBehaviour
     #region Cutscenes
     IEnumerator BeginGame()
     {
+        UIManager.Instance.pauseBtn.GetComponent<Animator>().Play("Hide");
+
         yield return new WaitForSecondsRealtime(0.9f);
 
         targetMusicCutoff = 22000;
@@ -310,6 +319,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.topHUDController.Show();
 
         yield return new WaitForSecondsRealtime(0.2f);
+        UIManager.Instance.pauseBtn.GetComponent<Animator>().Play("Show");
 
         ScoreSystem.Instance.lockScore = false;
         OnGameReady?.Invoke();
@@ -342,6 +352,7 @@ public class GameManager : MonoBehaviour
         anim.SetBool("DestructionPause", true);
         yield return new WaitWhile(() => paused);
 
+        UIManager.Instance.pauseBtn.GetComponent<Animator>().Play("Hide");
         canPause = false;
 
         AudioManager.Instance.PlaySoundAtPosition(AudioManager.Instance.GetSound("Player Explosion"), playerController.transform.position);
@@ -428,6 +439,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.6f);
 
         UIManager.Instance.topHUDController.Show();
+        UIManager.Instance.pauseBtn.GetComponent<Animator>().Play("Show");
 
         ScoreSystem.Instance.lockScore = false;
         ScoreSystem.Instance.SetScore(0);

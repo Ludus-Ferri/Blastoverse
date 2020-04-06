@@ -28,6 +28,10 @@ ui.options.other.credits Credits
 ui.options.other.invertControls.enabled Inverted Controls
 ui.options.other.invertControls.disabled Normal Controls
 
+ui.pause.text Paused
+ui.pause.resumeButton Resume
+ui.pause.quitButton Quit
+
 game.loss.1 You got shot.
 game.loss.2 Get rekt!
 game.loss.3 You lose.
