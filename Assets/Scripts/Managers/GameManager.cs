@@ -228,12 +228,12 @@ public class GameManager : MonoBehaviour
     public void OnQuitGame()
     {
         Debug.Log("Quitting!");
-        Application.Quit();
+        StartCoroutine(QuitGameCutscene());
     }
 
-    #endregion
+#endregion
 
-    #region Game Events
+#region Game Events
     public void OnLoss()
     {
         isHighScore = false;
@@ -283,20 +283,22 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.pauseMenuManager.SetVisible(paused);
 
             targetMusicCutoff = paused ? musicPauseLowpass : 22000;
+
+            playerController.controlsEnabled = !paused;
         }
     }
 
-    #endregion
+#endregion
 
-    #region UI Events
+#region UI Events
     public void OnMenuEnd()
     {
         StartCoroutine(EndMenu());
     }
 
-    #endregion
+#endregion
 
-    #region Cutscenes
+#region Cutscenes
     IEnumerator BeginGame()
     {
         UIManager.Instance.pauseBtn.GetComponent<Animator>().Play("Hide");
@@ -339,6 +341,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndMenu()
     {
+        yield return new WaitForSecondsRealtime(0.2f);
         targetMusicVolume = -80;
 
         UIManager.Instance.blackCutoutController.FadeToBlack();
@@ -447,7 +450,13 @@ public class GameManager : MonoBehaviour
         OnGameReady?.Invoke();
     }
 
+    IEnumerator QuitGameCutscene()
+    {
+        UIManager.Instance.blackCutoutController.FadeToBlack();
+        yield return new WaitForSecondsRealtime(0.9f);
 
+        Application.Quit();
+    }
 
     IEnumerator EndGame()
     {
@@ -459,9 +468,9 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene("NewMenu");
     }
-    #endregion
+#endregion
 
-    #region Music
+#region Music
     void PlayGameMusic()
     {
         LayeredBGMPlayer.Instance.currentBGM = gameMusic;
@@ -475,9 +484,9 @@ public class GameManager : MonoBehaviour
         LayeredBGMPlayer.Instance.LoadBGM();
         LayeredBGMPlayer.Instance.Play();
     }
-    #endregion
+#endregion
 
-    #region Miscellaneous
+#region Miscellaneous
 
     void FindGameObjects()
     {
@@ -491,5 +500,5 @@ public class GameManager : MonoBehaviour
         asteroidPool = GameObject.FindGameObjectWithTag("Asteroid Pool").GetComponent<ObjectPooler>();
     }
 
-    #endregion
+#endregion
 }

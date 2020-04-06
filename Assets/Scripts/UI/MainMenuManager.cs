@@ -39,6 +39,7 @@ public class MainMenuManager : MonoBehaviour
 
     IEnumerator AnimateShowOptions()
     {
+        yield return new WaitForSecondsRealtime(0.2f);
         mainAnim.SetTrigger("Hide");
         yield return new WaitForSecondsRealtime(0.1f);
         optionsAnim.SetTrigger("Show");
