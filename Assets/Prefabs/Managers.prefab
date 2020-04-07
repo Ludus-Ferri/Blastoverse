@@ -272,6 +272,7 @@ Transform:
   - {fileID: 5238916507769975843}
   - {fileID: 5238916508956439419}
   - {fileID: 5238916507952256513}
+  - {fileID: 3642078108135289082}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -431,6 +432,7 @@ MonoBehaviour:
   restartAsteroidRepelForce: 8
   isHighScore: 0
   paused: 0
+  canPause: 0
   playerExplosionParticle: {fileID: 5645599921727262493, guid: 8cefb607bb92b03458f3dc8a90ebb1a3,
     type: 3}
   playerReviveParticle: {fileID: 412925607502107111, guid: b22a3f7d72500fa4b9a2f1d7fc77c9dd,
@@ -438,6 +440,7 @@ MonoBehaviour:
   gameMusic: {fileID: 11400000, guid: 4e4364cb907a34644ac101696da8a663, type: 2}
   menuMusic: {fileID: 11400000, guid: bb34191e74ea5d34aa6034398cb59607, type: 2}
   musicLossLowpass: 300
+  musicPauseLowpass: 0
   musicLowpassSmoothing: 0.4
   musicLossVolume: -20
   musicVolumeSmoothing: 1
@@ -556,6 +559,37 @@ MonoBehaviour:
   topHUDController: {fileID: 0}
   blackCutoutController: {fileID: 0}
   highScoreModalController: {fileID: 0}
+  pauseMenuManager: {fileID: 0}
   restartBtn: {fileID: 0}
   giveUpBtn: {fileID: 0}
   pauseBtn: {fileID: 0}
+--- !u!1 &8235822473383254178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3642078108135289082}
+  m_Layer: 0
+  m_Name: Progression System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3642078108135289082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235822473383254178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5238916509037435538}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4274,6 +4274,60 @@ PrefabInstance:
       objectReference: {fileID: 1771334818}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7a22bd9fe679aa46a579e1dac03a85a, type: 3}
+--- !u!1 &5238916507825818334 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8235822473383254178, guid: b7a22bd9fe679aa46a579e1dac03a85a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5238916507825818333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5238916507825818335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5238916507825818334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ee3ebfbc8e8a04d89903050d7061f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressionSteps:
+  - scoreThreshold: 0
+    scorePerSecondMult: 1
+    asteroidSpawnRateMult: 1
+    asteroidVelocityMult: 1
+    asteroidSizeMult: 1
+    backgroundColor: {r: 0.16862746, g: 0.3764706, b: 0.6039216, a: 0}
+    musicIntensity: 0
+  - scoreThreshold: 10000
+    scorePerSecondMult: 10
+    asteroidSpawnRateMult: 1.3
+    asteroidVelocityMult: 1.2
+    asteroidSizeMult: 1.5
+    backgroundColor: {r: 0.23529412, g: 0.5568628, b: 0.17254902, a: 0}
+    musicIntensity: 0.2
+  - scoreThreshold: 100000
+    scorePerSecondMult: 30
+    asteroidSpawnRateMult: 1.6
+    asteroidVelocityMult: 1.5
+    asteroidSizeMult: 1.7
+    backgroundColor: {r: 0.6784314, g: 0.5058824, b: 0.11372549, a: 0}
+    musicIntensity: 0.4
+  - scoreThreshold: 500000
+    scorePerSecondMult: 80
+    asteroidSpawnRateMult: 1.9
+    asteroidVelocityMult: 1.7
+    asteroidSizeMult: 2.1
+    backgroundColor: {r: 0.69803923, g: 0.19215687, b: 0.12941177, a: 0}
+    musicIntensity: 0.6
+  - scoreThreshold: 2000000
+    scorePerSecondMult: 200
+    asteroidSpawnRateMult: 2.3
+    asteroidVelocityMult: 2
+    asteroidSizeMult: 2.5
+    backgroundColor: {r: 0.5019608, g: 0.2784314, b: 0.62352943, a: 0}
+    musicIntensity: 0.8
 --- !u!1001 &6067586276914416250
 PrefabInstance:
   m_ObjectHideFlags: 0
